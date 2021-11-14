@@ -20,7 +20,7 @@ class CreateClientesTable extends Migration
             $table->string('telefone', '30')->unique();
             $table->string('pais_residencia', '100')->nullable();
             $table->string('cidade_residencia', '100')->nullable();
-            $table->string('estado_br', '100')->nullable();
+            $table->string('estado_br', '2')->nullable();
             $table->string('cidade_br', '100')->nullable();
             $table->string('cpf', '11')->nullable();
             $table->string('rg', '15')->nullable();
