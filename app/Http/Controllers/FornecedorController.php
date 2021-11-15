@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Fornecedor;
 
 class FornecedorController extends Controller
 {
@@ -15,16 +16,7 @@ class FornecedorController extends Controller
     {
         return 'Chegamos no fornecedor';
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+  
 
     /**
      * Store a newly created resource in storage.
@@ -34,7 +26,8 @@ class FornecedorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $fornecedor = Fornecedor::create($request->all());
+        return $fornecedor;
     }
 
     /**

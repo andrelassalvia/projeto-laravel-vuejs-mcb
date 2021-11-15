@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Servico;
 
 class ServicoController extends Controller
 {
@@ -17,16 +18,6 @@ class ServicoController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -34,7 +25,8 @@ class ServicoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $servico = Servico::create($request->all());
+        return $servico;
     }
 
     /**
