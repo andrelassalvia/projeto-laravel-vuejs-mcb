@@ -13,7 +13,7 @@ class ServicoController extends Controller
      */
     public function index()
     {
-        //
+        return 'Chegamos no servico';
     }
 
     /**

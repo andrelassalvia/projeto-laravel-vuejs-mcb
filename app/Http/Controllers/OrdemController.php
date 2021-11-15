@@ -13,7 +13,7 @@ class OrdemController extends Controller
      */
     public function index()
     {
-        //
+        return 'Chegamos na ordem';
     }
 
     /**

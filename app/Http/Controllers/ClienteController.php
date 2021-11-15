@@ -13,7 +13,8 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        //
+        return 'Chegamos no cliente';
+
     }
 
     /**
