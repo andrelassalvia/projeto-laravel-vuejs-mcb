@@ -14,7 +14,8 @@ class ServicoController extends Controller
      */
     public function index()
     {
-        return 'Chegamos no servico';
+        $servico = Servico::all();
+        return $servico;
     }
 
     /**
@@ -35,9 +36,9 @@ class ServicoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Servico $servico)
     {
-        //
+        return $servico;
     }
 
     /**

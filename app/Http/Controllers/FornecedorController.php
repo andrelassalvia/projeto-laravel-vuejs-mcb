@@ -14,7 +14,8 @@ class FornecedorController extends Controller
      */
     public function index()
     {
-        return 'Chegamos no fornecedor';
+        $fornecedor = Fornecedor::all();
+        return $fornecedor;
     }
   
 
@@ -36,9 +37,9 @@ class FornecedorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Fornecedor $fornecedor)
     {
-        //
+        return $fornecedor;
     }
 
     /**

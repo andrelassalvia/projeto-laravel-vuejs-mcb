@@ -14,7 +14,8 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        return 'Chegamos no cliente';
+        $cliente = Cliente::all();
+        return $cliente;
 
     }
 
@@ -37,9 +38,9 @@ class ClienteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Cliente $cliente)
     {
-        //
+        return $cliente;
     }
 
     /**
