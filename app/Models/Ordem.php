@@ -10,4 +10,6 @@ class Ordem extends Model
     use HasFactory;
 
     protected $table = 'ordens';
+
+    protected $fillable = ['cliente_id', 'fornecedor_id', 'sevico_id', 'valor', 'status'];
 }
