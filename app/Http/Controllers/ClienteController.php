@@ -13,13 +13,18 @@ class ClienteController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    
+    //  Fazendo set $this->cliente com $cliente
+    public function __construct(Cliente $cliente){
+        $this->cliente = $cliente;
+    }
 
     public function index()
     {
-        $cliente = Cliente::all();
-        // dd($cliente);
+        // Ordem reversa por ID
+        $cliente = $this->cliente->all()->sortByDesc("id");
+       
         return $cliente;
+        
 
     }
 
@@ -32,7 +37,7 @@ class ClienteController extends Controller
     public function store(Request $request)
     {
         
-        $cliente = Cliente::create($request->all());
+        $cliente = $this->cliente->create($request->all());
         return $cliente;
     }
 
@@ -42,23 +47,16 @@ class ClienteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Cliente $cliente)
+    public function show($id)
     {
+        $cliente = $this->cliente->find($id);
+
         // dd($cliente);
+        
         return $cliente;
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
+    
     /**
      * Update the specified resource in storage.
      *
@@ -66,9 +64,10 @@ class ClienteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Cliente $cliente)
+    public function update(Request $request, $id)
     {
-        $cliente->update($request->all());
+        $cliente = $this->cliente->find($id);
+        $cliente = $cliente->update($request->all());
         return $cliente;
         
     }
@@ -79,8 +78,9 @@ class ClienteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Cliente $cliente)
+    public function destroy($id)
     {
+        $cliente = $this->cliente->find($id);
         $cliente->delete();
         return ['msg' => "Registro $cliente->nome excluido."];
     }

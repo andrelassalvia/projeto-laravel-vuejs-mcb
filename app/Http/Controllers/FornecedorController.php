@@ -12,9 +12,17 @@ class FornecedorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     public function __construct(Fornecedor $fornecedor){
+
+        $this->fornecedor = $fornecedor;
+     }
+
     public function index()
     {
-        $fornecedor = Fornecedor::all();
+        // $fornecedor = Fornecedor::all();
+        $fornecedor = $this->fornecedor->all()->sortByDesc('id');
+        
         return $fornecedor;
     }
   
@@ -27,7 +35,7 @@ class FornecedorController extends Controller
      */
     public function store(Request $request)
     {
-        $fornecedor = Fornecedor::create($request->all());
+        $fornecedor = $this->fornecedor->create($request->all());
         return $fornecedor;
     }
 
@@ -37,20 +45,10 @@ class FornecedorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Fornecedor $fornecedor)
+    public function show($id)
     {
+        $fornecedor = $this->fornecedor->find($id);
         return $fornecedor;
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
     }
 
     /**
@@ -60,9 +58,9 @@ class FornecedorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Fornecedor $fornecedor)
+    public function update(Request $request, $id)
     {
-        $fornecedor->update($request->all());
+        $fornecedor = $this->fornecedor->find($id)->update($request->all());
         return $fornecedor;
     }
 
@@ -72,9 +70,11 @@ class FornecedorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Fornecedor $fornecedor)
+    public function destroy($id)
     {
+        $fornecedor = $this->fornecedor->find($id);
         $fornecedor->delete();
+        
         return ['msg' => "O fornecedor $fornecedor->nome foi excluido com sucesso."];
     }
 }

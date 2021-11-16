@@ -12,10 +12,15 @@ class ServicoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct(Servico $servico){
+        $this->servico = $servico;
+    }
+
     public function index()
     {
-        $servico = Servico::all();
-        return $servico;
+       $servico = $this->servico->all()->sortBy('nome');
+       return $servico;
     }
 
     /**
@@ -26,7 +31,7 @@ class ServicoController extends Controller
      */
     public function store(Request $request)
     {
-        $servico = Servico::create($request->all());
+        $servico = $this->servico->create($request->all());
         return $servico;
     }
 
@@ -36,20 +41,10 @@ class ServicoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Servico $servico)
+    public function show($id)
     {
+        $servico = $this->servico->find($id);
         return $servico;
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
     }
 
     /**
@@ -59,8 +54,9 @@ class ServicoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Servico $servico)
+    public function update(Request $request, $id)
     {
+        $servico = $this->servico->find($id);
         $servico->update($request->all());
         return $servico;
         
@@ -72,8 +68,9 @@ class ServicoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Servico $servico)
+    public function destroy($id)
     {
+        $servico = $this->servico->find($id);
         $servico->delete();
         return ['msg' => "Registro de servico $servico->nome foi excluido com sucesso."];
     }
