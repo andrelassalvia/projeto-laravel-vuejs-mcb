@@ -59,9 +59,11 @@ class ServicoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Servico $servico)
     {
-        //
+        $servico->update($request->all());
+        return $servico;
+        
     }
 
     /**
@@ -70,8 +72,9 @@ class ServicoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Servico $servico)
     {
-        //
+        $servico->delete();
+        return ['msg' => "Registro de servico $servico->nome foi excluido com sucesso."];
     }
 }

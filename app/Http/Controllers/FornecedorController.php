@@ -60,9 +60,10 @@ class FornecedorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Fornecedor $fornecedor)
     {
-        //
+        $fornecedor->update($request->all());
+        return $fornecedor;
     }
 
     /**
@@ -71,8 +72,9 @@ class FornecedorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Fornecedor $fornecedor)
     {
-        //
+        $fornecedor->delete();
+        return ['msg' => "O fornecedor $fornecedor->nome foi excluido com sucesso."];
     }
 }

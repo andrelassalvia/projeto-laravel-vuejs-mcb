@@ -12,9 +12,13 @@ class ClienteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    
+
     public function index()
     {
         $cliente = Cliente::all();
+        // dd($cliente);
         return $cliente;
 
     }
@@ -40,6 +44,7 @@ class ClienteController extends Controller
      */
     public function show(Cliente $cliente)
     {
+        // dd($cliente);
         return $cliente;
     }
 
@@ -61,9 +66,11 @@ class ClienteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Cliente $cliente)
     {
-        //
+        $cliente->update($request->all());
+        return $cliente;
+        
     }
 
     /**
@@ -72,8 +79,9 @@ class ClienteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Cliente $cliente)
     {
-        //
+        $cliente->delete();
+        return ['msg' => "Registro $cliente->nome excluido."];
     }
 }
