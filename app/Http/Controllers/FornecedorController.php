@@ -48,6 +48,9 @@ class FornecedorController extends Controller
     public function show($id)
     {
         $fornecedor = $this->fornecedor->find($id);
+        if($fornecedor === null){
+            return ['erro' => 'Fornecedor procurado não está cadastrado'];
+        }
         return $fornecedor;
     }
 
@@ -60,7 +63,12 @@ class FornecedorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $fornecedor = $this->fornecedor->find($id)->update($request->all());
+        $fornecedor = $this->fornecedor->find($id);
+        if($fornecedor === null){
+            return ['erro' => 'Fornecedor procurado não está cadastrado'];
+        }
+        
+        $fornecedor = $fornecedor->update($request->all());
         return $fornecedor;
     }
 
@@ -73,6 +81,9 @@ class FornecedorController extends Controller
     public function destroy($id)
     {
         $fornecedor = $this->fornecedor->find($id);
+        if($fornecedor === null){
+            return ['erro' => 'Fornecedor procurado não está cadastrado'];
+        }
         $fornecedor->delete();
         
         return ['msg' => "O fornecedor $fornecedor->nome foi excluido com sucesso."];

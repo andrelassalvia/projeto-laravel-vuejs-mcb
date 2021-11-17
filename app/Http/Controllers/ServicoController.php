@@ -44,6 +44,9 @@ class ServicoController extends Controller
     public function show($id)
     {
         $servico = $this->servico->find($id);
+        if($servico === null){
+            return ['erro' => 'Servico procurado não está cadastrado.'];
+        }
         return $servico;
     }
 
@@ -57,7 +60,10 @@ class ServicoController extends Controller
     public function update(Request $request, $id)
     {
         $servico = $this->servico->find($id);
-        $servico->update($request->all());
+        if($servico === null){
+            return ['erro' => 'Servico procurado não está cadastrado.'];
+        }
+        $servico = $servico->update($request->all());
         return $servico;
         
     }
@@ -71,6 +77,9 @@ class ServicoController extends Controller
     public function destroy($id)
     {
         $servico = $this->servico->find($id);
+        if($servico === null){
+            return ['erro' => 'Servico procurado não está cadastrado.'];
+        }
         $servico->delete();
         return ['msg' => "Registro de servico $servico->nome foi excluido com sucesso."];
     }

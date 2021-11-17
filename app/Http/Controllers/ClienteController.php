@@ -50,6 +50,9 @@ class ClienteController extends Controller
     public function show($id)
     {
         $cliente = $this->cliente->find($id);
+        if($cliente === null){
+            return ['erro' => 'Cliente procurado não está cadastrado.'];
+        }
 
         // dd($cliente);
         
@@ -67,6 +70,9 @@ class ClienteController extends Controller
     public function update(Request $request, $id)
     {
         $cliente = $this->cliente->find($id);
+        if($cliente === null){
+            return ['erro' => 'Cliente procurado não está cadastrado.'];
+        }
         $cliente = $cliente->update($request->all());
         return $cliente;
         
@@ -81,6 +87,9 @@ class ClienteController extends Controller
     public function destroy($id)
     {
         $cliente = $this->cliente->find($id);
+        if($cliente === null){
+            return ['erro' => 'Cliente procurado não está cadastrado.'];
+        }
         $cliente->delete();
         return ['msg' => "Registro $cliente->nome excluido."];
     }
