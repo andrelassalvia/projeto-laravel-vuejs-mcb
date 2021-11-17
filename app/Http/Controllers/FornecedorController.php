@@ -23,8 +23,7 @@ class FornecedorController extends Controller
         // $fornecedor = Fornecedor::all();
         $fornecedor = $this->fornecedor->all()->sortByDesc('id');
         
-        return $fornecedor;
-    }
+        return response()->json($fornecedor, 200);    }
   
 
     /**
@@ -36,8 +35,7 @@ class FornecedorController extends Controller
     public function store(Request $request)
     {
         $fornecedor = $this->fornecedor->create($request->all());
-        return $fornecedor;
-    }
+        return response()->json($fornecedor, 201);    }
 
     /**
      * Display the specified resource.
@@ -49,10 +47,9 @@ class FornecedorController extends Controller
     {
         $fornecedor = $this->fornecedor->find($id);
         if($fornecedor === null){
-            return ['erro' => 'Fornecedor procurado não está cadastrado'];
+            return response()->json(['erro' => 'Fornecedor procurado não está cadastrado'], 404);
         }
-        return $fornecedor;
-    }
+        return response()->json($fornecedor, 200);    }
 
     /**
      * Update the specified resource in storage.
@@ -65,12 +62,11 @@ class FornecedorController extends Controller
     {
         $fornecedor = $this->fornecedor->find($id);
         if($fornecedor === null){
-            return ['erro' => 'Fornecedor procurado não está cadastrado'];
+            return response(['erro' => 'Fornecedor procurado não está cadastrado'], 404);
         }
         
-        $fornecedor = $fornecedor->update($request->all());
-        return $fornecedor;
-    }
+        $fornecedor->update($request->all());
+        return response()->json($fornecedor, 200);    }
 
     /**
      * Remove the specified resource from storage.
@@ -82,10 +78,10 @@ class FornecedorController extends Controller
     {
         $fornecedor = $this->fornecedor->find($id);
         if($fornecedor === null){
-            return ['erro' => 'Fornecedor procurado não está cadastrado'];
+            return response()->json(['erro' => 'Fornecedor procurado não está cadastrado'], 404);
         }
         $fornecedor->delete();
         
-        return ['msg' => "O fornecedor $fornecedor->nome foi excluido com sucesso."];
+        return resoponse(['msg' => "O fornecedor $fornecedor->nome foi excluido com sucesso."], 200);
     }
 }

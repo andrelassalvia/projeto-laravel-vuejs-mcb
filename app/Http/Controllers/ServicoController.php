@@ -20,7 +20,7 @@ class ServicoController extends Controller
     public function index()
     {
        $servico = $this->servico->all()->sortBy('nome');
-       return $servico;
+       return response()->json($servico, 200);
     }
 
     /**
@@ -32,7 +32,7 @@ class ServicoController extends Controller
     public function store(Request $request)
     {
         $servico = $this->servico->create($request->all());
-        return $servico;
+        return response()->json($servico, 201);
     }
 
     /**
@@ -45,9 +45,9 @@ class ServicoController extends Controller
     {
         $servico = $this->servico->find($id);
         if($servico === null){
-            return ['erro' => 'Servico procurado não está cadastrado.'];
+            return response(['erro' => 'Servico procurado não está cadastrado.'], 404);
         }
-        return $servico;
+        return response()->json($servico, 200);
     }
 
     /**
@@ -61,10 +61,10 @@ class ServicoController extends Controller
     {
         $servico = $this->servico->find($id);
         if($servico === null){
-            return ['erro' => 'Servico procurado não está cadastrado.'];
+            return response()->json(['erro' => 'Servico procurado não está cadastrado.'], 404);
         }
-        $servico = $servico->update($request->all());
-        return $servico;
+        $servico->update($request->all());
+        return response()->json($servico, 200);
         
     }
 
@@ -78,9 +78,9 @@ class ServicoController extends Controller
     {
         $servico = $this->servico->find($id);
         if($servico === null){
-            return ['erro' => 'Servico procurado não está cadastrado.'];
+            return response()->json(['erro' => 'Servico procurado não está cadastrado.'], 404);
         }
         $servico->delete();
-        return ['msg' => "Registro de servico $servico->nome foi excluido com sucesso."];
+        return response()->json(['msg' => "Registro de servico $servico->nome foi excluido com sucesso."], 200);
     }
 }

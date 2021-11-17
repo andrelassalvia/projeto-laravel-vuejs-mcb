@@ -23,7 +23,7 @@ class ClienteController extends Controller
         // Ordem reversa por ID
         $cliente = $this->cliente->all()->sortByDesc("id");
        
-        return $cliente;
+        return response()->json($cliente, 200);
         
 
     }
@@ -38,7 +38,7 @@ class ClienteController extends Controller
     {
         
         $cliente = $this->cliente->create($request->all());
-        return $cliente;
+        return response()->json($cliente, 201);
     }
 
     /**
@@ -51,12 +51,12 @@ class ClienteController extends Controller
     {
         $cliente = $this->cliente->find($id);
         if($cliente === null){
-            return ['erro' => 'Cliente procurado não está cadastrado.'];
+            return response()->json(['erro' => 'Cliente procurado não está cadastrado.'], 404);
         }
 
         // dd($cliente);
         
-        return $cliente;
+        return response()->json($cliente, 200);
     }
 
     
@@ -71,10 +71,10 @@ class ClienteController extends Controller
     {
         $cliente = $this->cliente->find($id);
         if($cliente === null){
-            return ['erro' => 'Cliente procurado não está cadastrado.'];
+            return response()->json(['erro' => 'Cliente procurado não está cadastrado.'], 404);
         }
-        $cliente = $cliente->update($request->all());
-        return $cliente;
+        $cliente->update($request->all());
+        return response()->json($cliente, 200);
         
     }
 
@@ -88,9 +88,9 @@ class ClienteController extends Controller
     {
         $cliente = $this->cliente->find($id);
         if($cliente === null){
-            return ['erro' => 'Cliente procurado não está cadastrado.'];
+            return response()->json(['erro' => 'Cliente procurado não está cadastrado.'], 404);
         }
         $cliente->delete();
-        return ['msg' => "Registro $cliente->nome excluido."];
+        return response()->json(['msg' => "Registro $cliente->nome excluido."], 200);
     }
 }
