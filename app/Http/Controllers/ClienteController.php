@@ -36,6 +36,7 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate($this->cliente->rules(), $this->cliente->feedback());
         
         $cliente = $this->cliente->create($request->all());
         return response()->json($cliente, 201);
@@ -69,6 +70,8 @@ class ClienteController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate($this->cliente->rules(), $this->cliente->feedback());
+
         $cliente = $this->cliente->find($id);
         if($cliente === null){
             return response()->json(['erro' => 'Cliente procurado não está cadastrado.'], 404);

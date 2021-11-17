@@ -34,6 +34,8 @@ class FornecedorController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate($this->fornecedor->rules(), $this->fornecedor->feedback());
+
         $fornecedor = $this->fornecedor->create($request->all());
         return response()->json($fornecedor, 201);    }
 
@@ -60,6 +62,8 @@ class FornecedorController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate($this->fornecedor->rules(), $this->fornecedor->feedback());
+
         $fornecedor = $this->fornecedor->find($id);
         if($fornecedor === null){
             return response(['erro' => 'Fornecedor procurado não está cadastrado'], 404);
@@ -82,6 +86,6 @@ class FornecedorController extends Controller
         }
         $fornecedor->delete();
         
-        return resoponse(['msg' => "O fornecedor $fornecedor->nome foi excluido com sucesso."], 200);
+        return response(['msg' => "O fornecedor $fornecedor->nome foi excluido com sucesso."], 200);
     }
 }

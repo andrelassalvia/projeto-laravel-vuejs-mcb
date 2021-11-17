@@ -31,6 +31,7 @@ class ServicoController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate($this->servico->rules(), $this->servico->feedback());
         $servico = $this->servico->create($request->all());
         return response()->json($servico, 201);
     }
@@ -59,6 +60,8 @@ class ServicoController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate($this->servico->rules(), $this->servico->feedback());
+
         $servico = $this->servico->find($id);
         if($servico === null){
             return response()->json(['erro' => 'Servico procurado não está cadastrado.'], 404);
