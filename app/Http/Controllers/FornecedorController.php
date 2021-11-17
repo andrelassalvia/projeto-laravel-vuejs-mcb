@@ -62,7 +62,22 @@ class FornecedorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate($this->fornecedor->rules(), $this->fornecedor->feedback());
+        // dd($request->all());
+        
+        if($request->method() === 'PATCH'){
+            $dynamicRules = array();
+            foreach ($this->fornecedor->rules() as $input => $rule) {
+                               
+                if(array_key_exists($input, $request->all())){
+                    $dynamicRules[$input] = $rule;
+                }
+            }
+            $request->validate($dynamicRules, $this->fornecedor->feedback());
+        }else{
+
+            $request->validate($this->fornecedor->rules(), $this->fornecedor->feedback());
+        }
+        
 
         $fornecedor = $this->fornecedor->find($id);
         if($fornecedor === null){
@@ -70,7 +85,10 @@ class FornecedorController extends Controller
         }
         
         $fornecedor->update($request->all());
-        return response()->json($fornecedor, 200);    }
+        return response()->json($fornecedor, 200);  
+        
+    }
+        
 
     /**
      * Remove the specified resource from storage.
