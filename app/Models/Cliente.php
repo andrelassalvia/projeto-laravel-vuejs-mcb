@@ -39,7 +39,8 @@ class Cliente extends Model
             'required' => 'O campo :attribute é obrigatório.',
             'nome.min' => 'O campo nome deve ter no mínimo 3 letras.',
             'unique' => 'Este :attribute já existe no banco de dados',
-            'email' => 'O campo email deve ser válido.'
+            'email' => 'O campo email deve ser válido.',
+            'date' => 'Data deve ser válida.'
         ];
     }
 }

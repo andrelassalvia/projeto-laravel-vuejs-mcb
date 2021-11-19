@@ -38,7 +38,53 @@ class ClienteController extends Controller
     {
         $request->validate($this->cliente->rules(), $this->cliente->feedback());
         
-        $cliente = $this->cliente->create($request->all());
+        if($request->file('cpf_imagem')){
+            $imagem_cpf = $request->file('cpf_imagem');
+            $cpf_urn = $imagem_cpf->store('imagens/cpf', 'public');
+           
+
+        }
+        if($request->file('rg_imagem')){
+            $imagem_rg = $request->file('rg_imagem');
+            $rg_urn = $imagem_rg->store('imagens/rg', 'public');
+           
+
+        }
+        if($request->file('passaporte_imagem')){
+            $imagem_passaporte = $request->file('passaporte_imagem');
+            $passaporte_urn = $imagem_passaporte->store('imagens/passaporte', 'public');
+            
+            
+
+        }
+        if($request->file('cnh_imagem')){
+            $imagem_cnh = $request->file('cnh_imagem');
+            $cnh_urn = $imagem_cnh->store('imagens/cnh', 'public');
+           
+
+        }
+        // dd($passaporte_urn);
+
+        $cliente = $this->cliente;
+        $cliente->nome = $request->nome;
+        $cliente->telefone = $request->telefone;
+        $cliente->email = $request->email;
+        $cliente->pais_residencia = $request->pais_residencia;
+        $cliente->cidade_residencia = $request->cidade_residencia;
+        $cliente->estado_br = $request->estado_br;
+        $cliente->cidade_br = $request->cidade_br;
+        $cliente->cpf = $request->cpf;
+        $cliente->cpf_imagem = $cpf_urn;
+        $cliente->rg = $request->rg;
+        $cliente->rg_imagem = $rg_urn;
+        $cliente->passaporte = $request->passaporte;
+        $cliente->passaporte_imagem = $passaporte_urn;
+        $cliente->cnh = $request->cnh;
+        $cliente->cnh_imagem = $cnh_urn;
+        $cliente->dt_nascimento = $request->dt_nascimento;
+        
+        $cliente->save();
+
         return response()->json($cliente, 201);
     }
 
