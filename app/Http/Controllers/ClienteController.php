@@ -37,38 +37,43 @@ class ClienteController extends Controller
     public function store(Request $request)
     {
         $request->validate($this->cliente->rules(), $this->cliente->feedback());
+
+        $docs = ['cpf', 'rg', 'passaporte', 'cnh' ];
+        for ($i=0; $i <count($docs) ; $i++) { 
+            $el = $docs[$i];
+            $file = $request->file($el.'_imagem');
+            
+            if($file != null){
+                $urn = $file->store('imagens/'.$el, 'public');
+               
+                
+            }else{
+                $urn = null;
+            }
+
+            switch ($el) {
+                case 'cpf':
+                    $cpf_urn = $urn;
+                    break;
+                case 'rg':
+                    $rg_urn = $urn;
+                    break;
+                case 'passaporte':
+                    $passaporte_urn = $urn;
+                    break;
+                case 'cnh':
+                    $cnh_urn = $urn;
+                    break;
+                
+                default:
+                   $urn = null;
+                    break;
+            }
+        }
         
-        if($request->file('cpf_imagem') != null){
-            $imagem_cpf = $request->file('cpf_imagem');
-            $cpf_urn = $imagem_cpf->store('imagens/cpf', 'public');
-        }else{
-            $cpf_urn = null;
-        }
-
-        if($request->file('rg_imagem') != null){
-            $imagem_rg = $request->file('rg_imagem');
-            $rg_urn = $imagem_rg->store('imagens/rg', 'public');
-        }else{
-            $rg_urn = null;
-        }
-
-        if($request->file('passaporte_imagem') != null){
-            $imagem_passaporte = $request->file('passaporte_imagem');
-            $passaporte_urn = $imagem_passaporte->store('imagens/passaporte', 'public');
-        }else{
-            $passapore_urn = null;
-        }
-
-        if($request->file('cnh_imagem') != null){
-            $imagem_cnh = $request->file('cnh_imagem');
-            $cnh_urn = $imagem_cnh->store('imagens/cnh', 'public');
-        }else{
-            $cnh_urn = null;
-        }
-
-        // dd($cpf_urn, $passaporte_urn, $rg_urn, $cnh_urn);
-
+       
         $cliente = $this->cliente;
+
         $cliente->nome = $request->nome;
         $cliente->telefone = $request->telefone;
         $cliente->email = $request->email;
@@ -76,14 +81,19 @@ class ClienteController extends Controller
         $cliente->cidade_residencia = $request->cidade_residencia;
         $cliente->estado_br = $request->estado_br;
         $cliente->cidade_br = $request->cidade_br;
+
         $cliente->cpf = $request->cpf;
         $cliente->cpf_imagem = $cpf_urn;
+
         $cliente->rg = $request->rg;
         $cliente->rg_imagem = $rg_urn;
+
         $cliente->passaporte = $request->passaporte;
         $cliente->passaporte_imagem = $passaporte_urn;
+
         $cliente->cnh = $request->cnh;
         $cliente->cnh_imagem = $cnh_urn;
+        
         $cliente->dt_nascimento = $request->dt_nascimento;
 
         $cliente->save();
