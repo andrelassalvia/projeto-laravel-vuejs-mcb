@@ -38,32 +38,35 @@ class ClienteController extends Controller
     {
         $request->validate($this->cliente->rules(), $this->cliente->feedback());
         
-        if($request->file('cpf_imagem')){
+        if($request->file('cpf_imagem') != null){
             $imagem_cpf = $request->file('cpf_imagem');
             $cpf_urn = $imagem_cpf->store('imagens/cpf', 'public');
-           
-
+        }else{
+            $cpf_urn = null;
         }
-        if($request->file('rg_imagem')){
+
+        if($request->file('rg_imagem') != null){
             $imagem_rg = $request->file('rg_imagem');
             $rg_urn = $imagem_rg->store('imagens/rg', 'public');
-           
-
+        }else{
+            $rg_urn = null;
         }
-        if($request->file('passaporte_imagem')){
+
+        if($request->file('passaporte_imagem') != null){
             $imagem_passaporte = $request->file('passaporte_imagem');
             $passaporte_urn = $imagem_passaporte->store('imagens/passaporte', 'public');
-            
-            
-
+        }else{
+            $passapore_urn = null;
         }
-        if($request->file('cnh_imagem')){
+
+        if($request->file('cnh_imagem') != null){
             $imagem_cnh = $request->file('cnh_imagem');
             $cnh_urn = $imagem_cnh->store('imagens/cnh', 'public');
-           
-
+        }else{
+            $cnh_urn = null;
         }
-        // dd($passaporte_urn);
+
+        // dd($cpf_urn, $passaporte_urn, $rg_urn, $cnh_urn);
 
         $cliente = $this->cliente;
         $cliente->nome = $request->nome;
@@ -82,10 +85,11 @@ class ClienteController extends Controller
         $cliente->cnh = $request->cnh;
         $cliente->cnh_imagem = $cnh_urn;
         $cliente->dt_nascimento = $request->dt_nascimento;
-        
+
         $cliente->save();
 
         return response()->json($cliente, 201);
+
     }
 
     /**
