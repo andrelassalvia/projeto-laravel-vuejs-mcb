@@ -38,7 +38,8 @@ class ClienteController extends Controller
     {
         $request->validate($this->cliente->rules(), $this->cliente->feedback());
 
-        $docs = ['cpf', 'rg', 'passaporte', 'cnh' ];
+        $docs = $this->cliente->docsImages;
+       
         for ($i=0; $i <count($docs) ; $i++) { 
             $el = $docs[$i];
             $file = $request->file($el.'_imagem');

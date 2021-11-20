@@ -12,6 +12,9 @@ class Cliente extends Model
     use HasFactory;
     use SoftDeletes;
 
+    // Which documents could have a image associated with
+    public $docsImages = ['cpf', 'rg', 'passaporte', 'cnh'];
+
     protected $fillable = ['nome', 'telefone', 'email', 'pais_residencia', 'cidade_residencia', 'estado_br', 'cidade_br', 'cpf', 'rg', 'passaporte', 'cnh', 'dt_nascimento'];
 
     public function rules(){
