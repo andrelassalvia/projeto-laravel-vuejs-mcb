@@ -36,71 +36,60 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
+        // Validation Rules
         $request->validate($this->cliente->rules(), $this->cliente->feedback());
 
-        $docs = $this->cliente->docsImages;
-       
-        for ($i=0; $i <count($docs) ; $i++) { 
-            $el = $docs[$i];
-            $file = $request->file($el.'_imagem');
-            
+        // Attributes without images
+        $cliente = $this->cliente->create([
+            'nome' => $request->nome, 
+            'telefone' => $request->telefone, 
+            'email' => $request->email, 
+            'pais_residencia' => $request->pais_residencia, 
+            'cidade_residencia' => $request->cidade_residencia, 
+            'estado_br' => $request->estado_br, 
+            'cidade_br' => $request->cidade_br, 
+            'cpf' => $request->cpf, 
+            'rg' => $request->rg, 
+            'passaporte' => $request->passaporte, 
+            'cnh' => $request->cnh, 
+            'dt_nascimento' => $request->dt_nascimento
+        ]);
+
+        // Attributes with images
+        $docs = $this->cliente->docsElements;
+        $this->cliente = $cliente;
+        foreach ($docs as $doc) {
+            $file = $request->file($doc['field']);
+
             if($file != null){
-                $urn = $file->store('imagens/'.$el, 'public');
-               
+                $urn = $file->store('imagens/'.$doc['el'], 'public');
                 
-            }else{
-                $urn = null;
-            }
-
-            switch ($el) {
-                case 'cpf':
-                    $cpf_urn = $urn;
-                    break;
-                case 'rg':
-                    $rg_urn = $urn;
-                    break;
-                case 'passaporte':
-                    $passaporte_urn = $urn;
-                    break;
-                case 'cnh':
-                    $cnh_urn = $urn;
-                    break;
+                switch ($doc['el']) {
+                    case 'cpf':
+                        $cliente->cpf_imagem = $urn;
+                        break;
+                    case 'rg':
+                        $cliente->rg_imagem = $urn;
+                        break;
+                    case 'passaporte':
+                        $cliente->passaporte_imagem = $urn;
+                        break;
+                    case 'cnh':
+                        $cliente->cnh_imagem = $urn;
+                        break;
+                    
+                    default:
+                        $urn = null;
+                        break;
+                }
                 
-                default:
-                   $urn = null;
-                    break;
             }
+           
         }
-        
-       
-        $cliente = $this->cliente;
-
-        $cliente->nome = $request->nome;
-        $cliente->telefone = $request->telefone;
-        $cliente->email = $request->email;
-        $cliente->pais_residencia = $request->pais_residencia;
-        $cliente->cidade_residencia = $request->cidade_residencia;
-        $cliente->estado_br = $request->estado_br;
-        $cliente->cidade_br = $request->cidade_br;
-
-        $cliente->cpf = $request->cpf;
-        $cliente->cpf_imagem = $cpf_urn;
-
-        $cliente->rg = $request->rg;
-        $cliente->rg_imagem = $rg_urn;
-
-        $cliente->passaporte = $request->passaporte;
-        $cliente->passaporte_imagem = $passaporte_urn;
-
-        $cliente->cnh = $request->cnh;
-        $cliente->cnh_imagem = $cnh_urn;
-        
-        $cliente->dt_nascimento = $request->dt_nascimento;
-
         $cliente->save();
 
         return response()->json($cliente, 201);
-
+        
     }
 
     /**
