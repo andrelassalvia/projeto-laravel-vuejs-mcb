@@ -7,6 +7,7 @@ use App\Models\Cliente;
 
 class ClienteController extends Controller
 {
+    
     /**
      * Display a listing of the resource.
      *
@@ -57,7 +58,6 @@ class ClienteController extends Controller
 
         // Attributes with images
         $docs = $this->cliente->docsElements;
-        $this->cliente = $cliente;
         foreach ($docs as $doc) {
             $file = $request->file($doc['field']);
 
@@ -137,7 +137,24 @@ class ClienteController extends Controller
         if($cliente === null){
             return response()->json(['erro' => 'Cliente procurado não está cadastrado.'], 404);
         }
-        $cliente->update($request->all());
+        $cliente = $this->cliente->update([
+            'nome' => $request->nome, 
+            'telefone' => $request->telefone, 
+            'email' => $request->email, 
+            'pais_residencia' => $request->pais_residencia, 
+            'cidade_residencia' => $request->cidade_residencia, 
+            'estado_br' => $request->estado_br, 
+            'cidade_br' => $request->cidade_br, 
+            'cpf' => $request->cpf, 
+            'rg' => $request->rg, 
+            'passaporte' => $request->passaporte, 
+            'cnh' => $request->cnh, 
+            'dt_nascimento' => $request->dt_nascimento
+        ]);
+        $cliente->save();
+        $docs = $this->cliente->docsElements;
+        $this->cliente = $cliente;
+       
         return response()->json($cliente, 200);
         
     }

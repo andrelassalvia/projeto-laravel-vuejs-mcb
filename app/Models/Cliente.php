@@ -15,8 +15,6 @@ class Cliente extends Model
     // Which documents could have a image associated with
     // public $docsImages = ['cpf', 'rg', 'passaporte', 'cnh'];
 
-    
-
     public $docsElements = array(
         [
             'el' => 'cpf',
@@ -44,10 +42,10 @@ class Cliente extends Model
             'nome' => 'bail|required|min:3|unique:clientes',
             'telefone' => 'bail|required|unique:clientes',
             'email' => 'bail|required|email',
-            'cpf_imagem' => 'bail|files|mimes:png,jpeg,jpg',
-            'rg_imagem' => 'bail|files|mimes:png,jpeg,jpg',
-            'passaporte_imagem' => 'bail|files|mimes:png,jpeg,jpg',
-            'cnh_imagem' => 'bail|files|mimes:png,jpeg,jpg',
+            'cpf_imagem' => 'bail|file|mimes:png,jpeg,jpg',
+            'rg_imagem' => 'bail|file|mimes:png,jpeg,jpg',
+            'passaporte_imagem' => 'bail|file|mimes:png,jpeg,jpg',
+            'cnh_imagem' => 'bail|file|mimes:png,jpeg,jpg',
 
             /*
             'pais_residencia' => ,
