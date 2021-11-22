@@ -120,6 +120,7 @@ class ClienteController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // Validacao para PATCH
         if($request->method() === 'PATCH'){
             $dynamicRules = array();
             foreach ($this->cliente->rules() as $input => $rule) {
@@ -134,26 +135,47 @@ class ClienteController extends Controller
         }
 
         $cliente = $this->cliente->find($id);
+       
         if($cliente === null){
             return response()->json(['erro' => 'Cliente procurado não está cadastrado.'], 404);
         }
-        $cliente = $this->cliente->update([
-            'nome' => $request->nome, 
-            'telefone' => $request->telefone, 
-            'email' => $request->email, 
-            'pais_residencia' => $request->pais_residencia, 
-            'cidade_residencia' => $request->cidade_residencia, 
-            'estado_br' => $request->estado_br, 
-            'cidade_br' => $request->cidade_br, 
-            'cpf' => $request->cpf, 
-            'rg' => $request->rg, 
-            'passaporte' => $request->passaporte, 
-            'cnh' => $request->cnh, 
-            'dt_nascimento' => $request->dt_nascimento
-        ]);
+        
+        // preenche o objeto com o que vier no request. Se nao vier, nao preenche.
+        $cliente->fill($request->all());
         $cliente->save();
+        
         $docs = $this->cliente->docsElements;
-        $this->cliente = $cliente;
+        foreach ($docs as $doc) {
+            $file = $request->file($doc['field']);
+
+            if($file != null){
+                $urn = $file->store('imagens/'.$doc['el'], 'public');
+                
+                switch ($doc['el']) {
+                    case 'cpf':
+                        $cliente->cpf_imagem = $urn;
+
+                        break;
+                    case 'rg':
+                        $cliente->rg_imagem = $urn;
+                        break;
+                    case 'passaporte':
+                        $cliente->passaporte_imagem = $urn;
+                        break;
+                    case 'cnh':
+                        $cliente->cnh_imagem = $urn;
+                        break;
+                    
+                    default:
+                        $urn = null;
+                        break;
+                }
+
+                $cliente->save();
+                
+            }
+           
+        }
        
         return response()->json($cliente, 200);
         
