@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Cliente;
+use Illuminate\Support\Facades\Storage;
 
 class ClienteController extends Controller
 {
@@ -143,26 +144,30 @@ class ClienteController extends Controller
         // preenche o objeto com o que vier no request. Se nao vier, nao preenche.
         $cliente->fill($request->all());
         $cliente->save();
-        
+
         $docs = $this->cliente->docsElements;
         foreach ($docs as $doc) {
             $file = $request->file($doc['field']);
 
             if($file != null){
+               
                 $urn = $file->store('imagens/'.$doc['el'], 'public');
                 
                 switch ($doc['el']) {
                     case 'cpf':
+                        Storage::disk('public')->delete($cliente->cpf_imagem); // remover imagem antiga
                         $cliente->cpf_imagem = $urn;
-
                         break;
                     case 'rg':
+                        Storage::disk('public')->delete($cliente->rg_imagem);
                         $cliente->rg_imagem = $urn;
                         break;
                     case 'passaporte':
+                        Storage::disk('public')->delete($cliente->passaporte_imagem);
                         $cliente->passaporte_imagem = $urn;
                         break;
                     case 'cnh':
+                        Storage::disk('public')->delete($cliente->cnh_imagem);
                         $cliente->cnh_imagem = $urn;
                         break;
                     
