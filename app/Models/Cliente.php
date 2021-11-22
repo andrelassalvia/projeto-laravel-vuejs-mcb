@@ -41,9 +41,14 @@ class Cliente extends Model
 
     public function rules(){
         return [
-            'nome' => 'required|min:3|unique:clientes',
-            'telefone' => 'required|unique:clientes',
-            'email' => 'required|email',
+            'nome' => 'bail|required|min:3|unique:clientes',
+            'telefone' => 'bail|required|unique:clientes',
+            'email' => 'bail|required|email',
+            'cpf_imagem' => 'bail|files|mimes:png,jpeg,jpg',
+            'rg_imagem' => 'bail|files|mimes:png,jpeg,jpg',
+            'passaporte_imagem' => 'bail|files|mimes:png,jpeg,jpg',
+            'cnh_imagem' => 'bail|files|mimes:png,jpeg,jpg',
+
             /*
             'pais_residencia' => ,
             'cidade_residencia' => ,
@@ -65,7 +70,8 @@ class Cliente extends Model
             'nome.min' => 'O campo nome deve ter no mínimo 3 letras.',
             'unique' => 'Este :attribute já existe no banco de dados',
             'email' => 'O campo email deve ser válido.',
-            'date' => 'Data deve ser válida.'
+            'date' => 'Data deve ser válida.',
+            'mimes' => 'O arquivo deve ser possuir a extensão .png, .jpeg ou .jpg'
         ];
     }
 }
