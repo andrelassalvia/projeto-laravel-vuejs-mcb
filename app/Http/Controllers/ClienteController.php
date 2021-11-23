@@ -26,8 +26,7 @@ class ClienteController extends Controller
         $cliente = $this->cliente->all()->sortByDesc("id");
        
         return response()->json($cliente, 200);
-        
-
+ 
     }
 
     /**
@@ -105,12 +104,9 @@ class ClienteController extends Controller
         if($cliente === null){
             return response()->json(['erro' => 'Cliente procurado não está cadastrado.'], 404);
         }
-
-        // dd($cliente);
         
         return response()->json($cliente, 200);
     }
-
     
     /**
      * Update the specified resource in storage.
@@ -135,6 +131,7 @@ class ClienteController extends Controller
             $request->validate($this->cliente->rules(), $this->cliente->feedback());
         }
 
+        // Encontrando o cliente
         $cliente = $this->cliente->find($id);
        
         if($cliente === null){
