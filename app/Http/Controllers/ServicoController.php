@@ -17,10 +17,17 @@ class ServicoController extends Controller
         $this->servico = $servico;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-       $servico = $this->servico->all()->sortBy('nome');
-       return response()->json($servico, 200);
+        $servicos = array();
+        if($request->attrib){
+            $attrib = $request->attrib;
+            $servicos = $this->servico->selectRaw($attrib)->get()->sortBy('nome');
+        }else{
+
+            $servicos = $this->servico->all()->sortBy('nome');
+        }
+       return response()->json($servicos, 200);
     }
 
     /**

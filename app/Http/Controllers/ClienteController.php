@@ -20,12 +20,21 @@ class ClienteController extends Controller
         $this->cliente = $cliente;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        // Ordem reversa por ID
-        $cliente = $this->cliente->all()->sortByDesc("id");
+        $clientes = array();
+        if($request->has('attrib')){
+            $attrib = $request->attrib;
+            $clientes = $this->cliente->selectRaw($attrib)->get()->sortByDesc('updated_at');
+           
+
+        }else{
+
+            // Ordem reversa por ID
+            $clientes = $this->cliente->all()->sortByDesc("updated_at");
+        }
        
-        return response()->json($cliente, 200);
+        return response()->json($clientes, 200);
  
     }
 

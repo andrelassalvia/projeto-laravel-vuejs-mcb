@@ -18,12 +18,19 @@ class FornecedorController extends Controller
         $this->fornecedor = $fornecedor;
      }
 
-    public function index()
+    public function index(Request $request)
     {
-        // $fornecedor = Fornecedor::all();
-        $fornecedor = $this->fornecedor->all()->sortByDesc('id');
+        $fornecedores = array();
+        if($request->has('attrib')){
+            $attrib = $request->attrib;
+            $fornecedores = $this->fornecedor->selectRaw($attrib)->get()->sortByDesc('updated_at');
+
+        }else{
+
+            $fornecedores = $this->fornecedor->all()->sortByDesc('updated_at');
+        }
         
-        return response()->json($fornecedor, 200);    }
+        return response()->json($fornecedores, 200);    }
   
 
     /**
