@@ -23,4 +23,8 @@ class Servico extends Model
             'unique' => 'Este nome já foi utilizado para registrar um serviço.'
         ];
     }
+
+    public function ordens(){
+        return $this->hasMany('App\Models\Ordem');
+    }
 }

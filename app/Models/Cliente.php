@@ -72,4 +72,9 @@ class Cliente extends Model
             'mimes' => 'O arquivo deve ser possuir a extensão .png, .jpeg ou .jpg'
         ];
     }
+
+    public function ordens(){
+        // um cliente pode ter varias ordens
+        return $this->hasMany('App\Models\Ordem');
+    }
 }

@@ -33,4 +33,8 @@ class Fornecedor extends Model
             'email' => 'O campo email deve ser válido.'
         ];
     }
+
+    public function ordens(){
+        return $this->hasMany('App\Models\Ordem');
+    }
 }

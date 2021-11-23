@@ -51,7 +51,7 @@ class ServicoController extends Controller
      */
     public function show($id)
     {
-        $servico = $this->servico->find($id);
+        $servico = $this->servico->with('ordens')->find($id);
         if($servico === null){
             return response(['erro' => 'Servico procurado não está cadastrado.'], 404);
         }

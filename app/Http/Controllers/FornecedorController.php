@@ -54,7 +54,7 @@ class FornecedorController extends Controller
      */
     public function show($id)
     {
-        $fornecedor = $this->fornecedor->find($id);
+        $fornecedor = $this->fornecedor->with('ordens')->find($id);
         if($fornecedor === null){
             return response()->json(['erro' => 'Fornecedor procurado não está cadastrado'], 404);
         }

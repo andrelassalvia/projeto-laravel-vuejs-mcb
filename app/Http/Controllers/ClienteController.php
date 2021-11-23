@@ -121,7 +121,7 @@ class ClienteController extends Controller
      */
     public function show($id)
     {
-        $cliente = $this->cliente->find($id);
+        $cliente = $this->cliente->with('ordens')->find($id);
         if($cliente === null){
             return response()->json(['erro' => 'Cliente procurado não está cadastrado.'], 404);
         }

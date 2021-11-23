@@ -46,7 +46,7 @@ class OrdemController extends Controller
      */
     public function show($id)
     {
-        $ordem = $this->ordem->find($id);
+        $ordem = $this->ordem->with('cliente', 'fornecedor', 'servico')->find($id);
         if($ordem === null){
             return response()->json(['erro' => 'ordem procurada não está cadastrada'], 404);
         }

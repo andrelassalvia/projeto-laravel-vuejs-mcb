@@ -29,4 +29,20 @@ class Ordem extends Model
              
         ];
     }
+
+    public function cliente(){
+        // uma ordem pertence a um cliente
+        return $this->belongsTo('App\Models\Cliente');
+    }
+
+    public function fornecedor(){
+        // uma ordem possui um fornecedor
+        return $this->belongsTo('App\Models\Fornecedor');
+    }
+
+    public function servico(){
+        // uma ordem e de um servico especifico
+        return $this->belongsTo('App\Models\Servico');
+
+    }
 }
