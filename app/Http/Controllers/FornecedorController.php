@@ -23,11 +23,11 @@ class FornecedorController extends Controller
         $fornecedores = array();
         if($request->has('attrib')){
             $attrib = $request->attrib;
-            $fornecedores = $this->fornecedor->selectRaw($attrib)->get()->sortByDesc('updated_at');
+            $fornecedores = $this->fornecedor->selectRaw($attrib)->with('ordens')->get()->sortByDesc('updated_at');
 
         }else{
 
-            $fornecedores = $this->fornecedor->all()->sortByDesc('updated_at');
+            $fornecedores = $this->fornecedor->with('ordens')->get()->sortByDesc('updated_at');
         }
         
         return response()->json($fornecedores, 200);    }

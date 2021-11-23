@@ -17,7 +17,7 @@ class OrdemController extends Controller
      */
     public function index()
     {
-        $ordens = $this->ordem->all()->sortByDesc("updated_at");
+        $ordens = $this->ordem->with('cliente', 'fornecedor', 'servico')->get()->sortByDesc("updated_at");
 
         return response()->json($ordens, 200);
     }

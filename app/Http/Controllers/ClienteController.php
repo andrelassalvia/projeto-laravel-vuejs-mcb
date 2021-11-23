@@ -26,23 +26,23 @@ class ClienteController extends Controller
 
         if($request->has('attrib')){
             $attrib = $request->attrib;
-            $clientes = $this->cliente->selectRaw($attrib)->get()->sortByDesc('updated_at');
+            $clientes = $this->cliente->selectRaw($attrib)->with('ordens')->get()->sortByDesc('updated_at');
             // dd($clientes);
 
         }
         else{
 
             // Ordem reversa por ID
-            $clientes = $this->cliente->all()->sortByDesc("updated_at");
+            $clientes = $this->cliente->with('ordens')->get()->sortByDesc("updated_at");
             // dd($clientes);
 
         }
 
         if($request->has('filtro')){
             $condition = explode(':', $request->filtro);
-            dd($condition);
+            // dd($condition);
             $clientes = $clientes->where($condition[0], $condition[1], $condition[2]);
-            dd($clientes);
+            // dd($clientes);
 
         }
        

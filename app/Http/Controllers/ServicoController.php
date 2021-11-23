@@ -22,10 +22,10 @@ class ServicoController extends Controller
         $servicos = array();
         if($request->attrib){
             $attrib = $request->attrib;
-            $servicos = $this->servico->selectRaw($attrib)->get()->sortBy('nome');
+            $servicos = $this->servico->selectRaw($attrib)->with('ordens')->get()->sortBy('nome');
         }else{
 
-            $servicos = $this->servico->all()->sortBy('nome');
+            $servicos = $this->servico->with('ordens')->get()->sortBy('nome');
         }
        return response()->json($servicos, 200);
     }
