@@ -7,27 +7,37 @@ use App\Models\Fornecedor;
 
 class FornecedorController extends Controller
 {
+    public function __construct(Fornecedor $fornecedor){
+
+        $this->fornecedor = $fornecedor;
+     }
+
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
 
-     public function __construct(Fornecedor $fornecedor){
-
-        $this->fornecedor = $fornecedor;
-     }
-
     public function index(Request $request)
     {
         $fornecedores = array();
+
+        
         if($request->has('attrib')){
             $attrib = $request->attrib;
-            $fornecedores = $this->fornecedor->selectRaw($attrib)->with('ordens')->get()->sortByDesc('updated_at');
+            $fornecedores = $this->fornecedor->selectRaw($attrib)->with('ordens');
 
         }else{
 
-            $fornecedores = $this->fornecedor->with('ordens')->get()->sortByDesc('updated_at');
+            $fornecedores = $this->fornecedor->with('ordens');
+        }
+
+        if($request->has('filtro')){
+            $condicoes = explode(':', $request->filtro);
+            $fornecedores = $fornecedores->where($condicoes[0], $condicoes[1], $condicoes[2])->get()->sortByDesc('updated_at');
+        }else{
+            $fornecedores = $fornecedores->get()->sortByDesc('updated_at');
         }
         
         return response()->json($fornecedores, 200);    }

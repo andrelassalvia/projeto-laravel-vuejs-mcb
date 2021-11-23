@@ -26,6 +26,12 @@ class OrdemController extends Controller
             $ordens = $this->ordem->with('cliente');
         }
 
+        if($request->has('filtro')){
+            dd($request->filtro);
+            $condicoes = explode(':', $request->filtro);
+            $ordens = $ordens->where($condicoes[0], $condicoes[1], $condicoes[2]);
+        }
+
         if($request->has('attrib_fornecedor')){
             $attrib_fornecedor = $request->attrib_fornecedor;
             $ordens = $ordens->with('fornecedor:id,'.$attrib_fornecedor);

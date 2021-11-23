@@ -7,26 +7,35 @@ use App\Models\Servico;
 
 class ServicoController extends Controller
 {
+    public function __construct(Servico $servico){
+        $this->servico = $servico;
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
 
-    public function __construct(Servico $servico){
-        $this->servico = $servico;
-    }
+    
 
     public function index(Request $request)
     {
         $servicos = array();
-        if($request->attrib){
-            $attrib = $request->attrib;
-            $servicos = $this->servico->selectRaw($attrib)->with('ordens')->get()->sortBy('nome');
-        }else{
 
-            $servicos = $this->servico->with('ordens')->get()->sortBy('nome');
+        if($request->has('attrib')){
+            $attrib = $request->attrib;
+            $servicos = $this->servico->selectRaw($attrib)->with('ordens');
+        }else{
+            $servicos = $this->servico->with('ordens');
         }
+
+        if($request->has('filtro')){
+            $condicoes = explode(':', $request->filtro);
+            $servicos = $servicos->where($condicoes[0], $condicoes[1], $condicoes[2])->get()->sortByDesc('updated-at');
+        }else{
+            $servicos = $servicos->get()->sortByDesc('updated_at');
+        }
+
        return response()->json($servicos, 200);
     }
 

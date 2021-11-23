@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Storage;
 
 class ClienteController extends Controller
 {
+    public function __construct(Cliente $cliente){
+        $this->cliente = $cliente;
+        //  Fazendo set $this->cliente com $cliente
+    }
     
     /**
      * Display a listing of the resource.
@@ -15,10 +19,7 @@ class ClienteController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    //  Fazendo set $this->cliente com $cliente
-    public function __construct(Cliente $cliente){
-        $this->cliente = $cliente;
-    }
+    
 
     public function index(Request $request)
     {
@@ -26,18 +27,20 @@ class ClienteController extends Controller
 
         if($request->has('attrib')){
             $attrib = $request->attrib;
-            $clientes = $this->cliente->selectRaw($attrib)->with('ordens')->get()->sortByDesc('updated_at');
+            $clientes = $this->cliente->selectRaw($attrib)->with('ordens');
         }
         else{
             // Ordem reversa por ID
-            $clientes = $this->cliente->with('ordens')->get()->sortByDesc("updated_at");
+            $clientes = $this->cliente->with('ordens');
         }
 
-        // if($request->has('filtro')){
-        //     $condition = explode(':', $request->filtro);
-        //     $clientes = $clientes->where($condition[0], $condition[1], $condition[2]);
-        // }
-       
+        if($request->has('filtro')){
+            $condicoes = explode(':', $request->filtro);
+            $clientes = $clientes->where($condicoes[0], $condicoes[1], $condicoes[2])->get()->sortByDesc('updated_at');
+        }else{
+            $clientes = $clientes->get()->sortByDesc('updated_at');
+        }
+     
         return response()->json($clientes, 200);
  
     }
