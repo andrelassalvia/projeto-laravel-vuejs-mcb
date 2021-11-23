@@ -18,12 +18,33 @@ class OrdemController extends Controller
     public function index(Request $request)
     {
         $ordens = array();
+
+        if($request->has('attrib_cliente')){
+            $attrib_cliente = $request->attrib_cliente;
+            $ordens = $this->ordem->with('cliente:id,'.$attrib_cliente);
+        }else{
+            $ordens = $this->ordem->with('cliente');
+        }
+
+        if($request->has('attrib_fornecedor')){
+            $attrib_fornecedor = $request->attrib_fornecedor;
+            $ordens = $ordens->with('fornecedor:id,'.$attrib_fornecedor);
+        }else{
+            $ordens = $ordens->with('fornecedor');
+        }
+
+        if($request->has('attrib_servico')){
+            $attrib_servico = $request->attrib_servico;
+            $ordens = $ordens->with('servico:id,'.$attrib_servico);
+        }else{
+            $ordens = $ordens->with('servico');
+        }
+
         if($request->has('attrib')){
             $attrib = $request->attrib;
-            $ordens = $this->ordem->selectRaw($attrib)->with($this->ordem->relationship)->get();
-            
+            $ordens = $ordens->selectRaw($attrib)->get()->sortByDesc("updated_at");
         }else{
-            $ordens = $this->ordem->with($this->ordem->relationship)->get()->sortByDesc("updated_at");
+            $ordens = $ordens->get()->sortByDesc("updated_at");
         }
 
 
@@ -54,7 +75,7 @@ class OrdemController extends Controller
      */
     public function show($id)
     {
-        $ordem = $this->ordem->with($this->ordem->relationship)->find($id);
+        $ordem = $this->ordem->with('cliente', 'fornecedor', 'servico')->find($id);
         if($ordem === null){
             return response()->json(['erro' => 'ordem procurada não está cadastrada'], 404);
         }

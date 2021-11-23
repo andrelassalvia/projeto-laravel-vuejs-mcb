@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Ordem extends Model
 {
     use HasFactory;
-    public $relationship = ['cliente', 'fornecedor', 'servico'];
 
     protected $table = 'ordens';
 
