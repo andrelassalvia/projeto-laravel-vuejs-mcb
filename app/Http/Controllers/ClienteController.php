@@ -23,15 +23,27 @@ class ClienteController extends Controller
     public function index(Request $request)
     {
         $clientes = array();
+
         if($request->has('attrib')){
             $attrib = $request->attrib;
             $clientes = $this->cliente->selectRaw($attrib)->get()->sortByDesc('updated_at');
-           
+            // dd($clientes);
 
-        }else{
+        }
+        else{
 
             // Ordem reversa por ID
             $clientes = $this->cliente->all()->sortByDesc("updated_at");
+            // dd($clientes);
+
+        }
+
+        if($request->has('filtro')){
+            $condition = explode(':', $request->filtro);
+            dd($condition);
+            $clientes = $clientes->where($condition[0], $condition[1], $condition[2]);
+            dd($clientes);
+
         }
        
         return response()->json($clientes, 200);

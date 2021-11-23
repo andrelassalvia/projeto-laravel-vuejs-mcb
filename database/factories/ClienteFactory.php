@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\Cliente;
 
 
 
@@ -29,7 +30,7 @@ class ClienteFactory extends Factory
             'cnh' => $this->faker->e164PhoneNumber, 
             'dt_nascimento' => $this->faker->date
 
-            //
+            
         ];
     }
 }

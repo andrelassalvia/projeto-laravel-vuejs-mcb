@@ -11,5 +11,22 @@ class Ordem extends Model
 
     protected $table = 'ordens';
 
-    protected $fillable = ['cliente_id', 'fornecedor_id', 'sevico_id', 'valor', 'status'];
+    protected $fillable = ['cliente_id', 'fornecedor_id', 'servico_id', 'valor', 'status'];
+
+    public function rules(){
+        return [
+            'cliente_id' => 'exists:clientes,id',
+            'fornecedor_id' => 'exists:fornecedores,id',
+            'sevico_id' => 'exists:servicos,id',
+            'valor' => 'required',
+
+        ];
+    }
+
+    public function feedback(){
+        return [
+            'required' => 'O campo :attribute é obrigatório.',
+             
+        ];
+    }
 }

@@ -19,7 +19,7 @@ class CreateOrdensTable extends Migration
             $table->unsignedBigInteger('fornecedor_id');
             $table->unsignedBigInteger('servico_id');
             $table->float('valor', 8, 2);
-            $table->integer('status');
+            $table->string('status', '50');
             $table->softDeletes();
             $table->timestamps();
         });
