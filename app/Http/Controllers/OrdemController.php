@@ -15,9 +15,17 @@ class OrdemController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $ordens = $this->ordem->with('cliente', 'fornecedor', 'servico')->get()->sortByDesc("updated_at");
+        $ordens = array();
+        if($request->has('attrib')){
+            $attrib = $request->attrib;
+            $ordens = $this->ordem->selectRaw($attrib)->with($this->ordem->relationship)->get();
+            
+        }else{
+            $ordens = $this->ordem->with($this->ordem->relationship)->get()->sortByDesc("updated_at");
+        }
+
 
         return response()->json($ordens, 200);
     }
@@ -46,7 +54,7 @@ class OrdemController extends Controller
      */
     public function show($id)
     {
-        $ordem = $this->ordem->with('cliente', 'fornecedor', 'servico')->find($id);
+        $ordem = $this->ordem->with($this->ordem->relationship)->find($id);
         if($ordem === null){
             return response()->json(['erro' => 'ordem procurada não está cadastrada'], 404);
         }
