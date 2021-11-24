@@ -30,10 +30,17 @@ class ServicoController extends Controller
         }
 
         if($request->has('filtro')){
-            $condicoes = explode(':', $request->filtro);
-            $servicos = $servicos->where($condicoes[0], $condicoes[1], $condicoes[2])->get()->sortByDesc('updated-at');
+            // dd($request->filtro);
+            $filtro = explode(';', $request->filtro);
+            // dd($filtro);
+            foreach ($filtro as  $value) {
+                $c = explode(':', $value);
+                // dd($c);
+                $servico = $servico->where($c[0], $c[1], $c[2]);
+            }
+            $servico = $servico->get()->sortByDesc('updated_at');
         }else{
-            $servicos = $servicos->get()->sortByDesc('updated_at');
+            $servico = $servico->get()->sortByDesc('updated_at');
         }
 
        return response()->json($servicos, 200);

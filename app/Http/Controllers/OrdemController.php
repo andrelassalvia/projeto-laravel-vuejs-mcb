@@ -27,9 +27,13 @@ class OrdemController extends Controller
         }
 
         if($request->has('filtro')){
-            dd($request->filtro);
-            $condicoes = explode(':', $request->filtro);
-            $ordens = $ordens->where($condicoes[0], $condicoes[1], $condicoes[2]);
+            $filtros = explode(';', $request->filtro);
+            // dd($filtros);
+            foreach ($filtros as $value) {
+                $condicoes = explode(':', $value);
+                $ordens = $ordens->where($condicoes[0], $condicoes[1], $condicoes[2]);
+            }  
+            
         }
 
         if($request->has('attrib_fornecedor')){

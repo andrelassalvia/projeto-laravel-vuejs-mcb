@@ -34,8 +34,15 @@ class FornecedorController extends Controller
         }
 
         if($request->has('filtro')){
-            $condicoes = explode(':', $request->filtro);
-            $fornecedores = $fornecedores->where($condicoes[0], $condicoes[1], $condicoes[2])->get()->sortByDesc('updated_at');
+            // dd($request->filtro);
+            $filtro = explode(';', $request->filtro);
+            // dd($filtro);
+            foreach ($filtro as  $value) {
+                $c = explode(':', $value);
+                // dd($c);
+                $fornecedores = $fornecedores->where($c[0], $c[1], $c[2]);
+            }
+            $fornecedores = $fornecedores->get()->sortByDesc('updated_at');
         }else{
             $fornecedores = $fornecedores->get()->sortByDesc('updated_at');
         }

@@ -35,8 +35,15 @@ class ClienteController extends Controller
         }
 
         if($request->has('filtro')){
-            $condicoes = explode(':', $request->filtro);
-            $clientes = $clientes->where($condicoes[0], $condicoes[1], $condicoes[2])->get()->sortByDesc('updated_at');
+            // dd($request->filtro);
+            $filtro = explode(';', $request->filtro);
+            // dd($filtro);
+            foreach ($filtro as  $value) {
+                $condicoes = explode(':', $value);
+                // dd($condicoes);
+                $clientes = $clientes->where($condicoes[0], $condicoes[1], $condicoes[2]);
+            }
+            $clientes = $clientes->get()->sortByDesc('updated_at');
         }else{
             $clientes = $clientes->get()->sortByDesc('updated_at');
         }
