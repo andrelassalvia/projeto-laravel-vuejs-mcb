@@ -22,9 +22,9 @@ class ServicoController extends Controller
     {
         $servicos = array();
 
-        if($request->has('attrib')){
-            $attrib = $request->attrib;
-            $servicos = $this->servico->selectRaw($attrib)->with('ordens');
+        if($request->has('attrib_ordens')){
+            $attrib_ordens = $request->attrib_ordens;
+            $servicos = $this->servico->with('ordens:id,'.$attrib_ordens);
         }else{
             $servicos = $this->servico->with('ordens');
         }
@@ -34,17 +34,21 @@ class ServicoController extends Controller
             $filtro = explode(';', $request->filtro);
             // dd($filtro);
             foreach ($filtro as  $value) {
-                $c = explode(':', $value);
-                // dd($c);
-                $servico = $servico->where($c[0], $c[1], $c[2]);
+                $condicoes = explode(':', $value);
+                // dd($condicoes);
+                $servicos = $servicos->where($condicoes[0], $condicoes[1], $condicoes[2]);
             }
-            $servico = $servico->get()->sortByDesc('updated_at');
-        }else{
-            $servico = $servico->get()->sortByDesc('updated_at');
+            
         }
 
-       return response()->json($servicos, 200);
-    }
+        if($request->has('attrib')){
+            $attrib = $request->attrib;
+            $servicos = $servicos->selectRaw($attrib)->get()->sortByDesc('updated_at');
+        }else{
+            $servicos = $servicos->get()->sortByDesc('updated_at');
+        }
+     
+        return response()->json($servicos, 200);}
 
     /**
      * Store a newly created resource in storage.

@@ -25,12 +25,10 @@ class ClienteController extends Controller
     {
         $clientes = array();
 
-        if($request->has('attrib')){
-            $attrib = $request->attrib;
-            $clientes = $this->cliente->selectRaw($attrib)->with('ordens');
-        }
-        else{
-            // Ordem reversa por ID
+        if($request->has('attrib_ordens')){
+            $attrib_ordens = $request->attrib_ordens;
+            $clientes = $this->cliente->with('ordens:id,'.$attrib_ordens);
+        }else{
             $clientes = $this->cliente->with('ordens');
         }
 
@@ -43,7 +41,12 @@ class ClienteController extends Controller
                 // dd($condicoes);
                 $clientes = $clientes->where($condicoes[0], $condicoes[1], $condicoes[2]);
             }
-            $clientes = $clientes->get()->sortByDesc('updated_at');
+            
+        }
+
+        if($request->has('attrib')){
+            $attrib = $request->attrib;
+            $clientes = $clientes->selectRaw($attrib)->get()->sortByDesc('updated_at');
         }else{
             $clientes = $clientes->get()->sortByDesc('updated_at');
         }

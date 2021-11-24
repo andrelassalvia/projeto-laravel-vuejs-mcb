@@ -23,13 +23,10 @@ class FornecedorController extends Controller
     {
         $fornecedores = array();
 
-        
-        if($request->has('attrib')){
-            $attrib = $request->attrib;
-            $fornecedores = $this->fornecedor->selectRaw($attrib)->with('ordens');
-
+        if($request->has('attrib_ordens')){
+            $attrib_ordens = $request->attrib_ordens;
+            $fornecedores = $this->fornecedor->with('ordens:id,'.$attrib_ordens);
         }else{
-
             $fornecedores = $this->fornecedor->with('ordens');
         }
 
@@ -38,16 +35,24 @@ class FornecedorController extends Controller
             $filtro = explode(';', $request->filtro);
             // dd($filtro);
             foreach ($filtro as  $value) {
-                $c = explode(':', $value);
-                // dd($c);
-                $fornecedores = $fornecedores->where($c[0], $c[1], $c[2]);
+                $condicoes = explode(':', $value);
+                // dd($condicoes);
+                $fornecedores = $fornecedores->where($condicoes[0], $condicoes[1], $condicoes[2]);
             }
-            $fornecedores = $fornecedores->get()->sortByDesc('updated_at');
+            
+        }
+
+        if($request->has('attrib')){
+            $attrib = $request->attrib;
+            $fornecedores = $fornecedores->selectRaw($attrib)->get()->sortByDesc('updated_at');
         }else{
             $fornecedores = $fornecedores->get()->sortByDesc('updated_at');
         }
+     
+        return response()->json($fornecedores, 200);
+
+    }
         
-        return response()->json($fornecedores, 200);    }
   
 
     /**
