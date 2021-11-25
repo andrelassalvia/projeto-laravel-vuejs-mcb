@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Ordem;
+use App\Repositories\OrdemRepository;
 
 class OrdemController extends Controller
 {
@@ -17,48 +18,41 @@ class OrdemController extends Controller
      */
     public function index(Request $request)
     {
-        $ordens = array();
+        $ordemRepository = new OrdemRepository($this->ordem);
 
         if($request->has('attrib_cliente')){
-            $attrib_cliente = $request->attrib_cliente;
-            $ordens = $this->ordem->with('cliente:id,'.$attrib_cliente);
+            $attrib_cliente = 'cliente:id,'.$request->attrib_cliente;
+            $ordemRepository->selectAttribRelacionados($attrib_cliente);
         }else{
-            $ordens = $this->ordem->with('cliente');
-        }
-
-        if($request->has('filtro')){
-            $filtros = explode(';', $request->filtro);
-            // dd($filtros);
-            foreach ($filtros as $value) {
-                $condicoes = explode(':', $value);
-                $ordens = $ordens->where($condicoes[0], $condicoes[1], $condicoes[2]);
-            }  
-            
+            $ordemRepository->selectAttribRelacionados('cliente');
         }
 
         if($request->has('attrib_fornecedor')){
-            $attrib_fornecedor = $request->attrib_fornecedor;
-            $ordens = $ordens->with('fornecedor:id,'.$attrib_fornecedor);
+            $attrib_fornecedor = 'fornecedor:id,'.$request->attrib_fornecedor;
+            $ordemRepository->selectAttribRelacionados($attrib_fornecedor);
         }else{
-            $ordens = $ordens->with('fornecedor');
+            $ordemRepository->selectAttribRelacionados('fornecedor');
         }
 
         if($request->has('attrib_servico')){
-            $attrib_servico = $request->attrib_servico;
-            $ordens = $ordens->with('servico:id,'.$attrib_servico);
+            $attrib_servico = 'servico:id,'.$request->attrib_servico;
+            $ordemRepository->selectAttribRelacionados($attrib_servico);
         }else{
-            $ordens = $ordens->with('servico');
+            $ordemRepository->selectAttribRelacionados('servico');
+        }
+
+        if($request->has('filtro')){
+            $ordemRepository->filtro($request->filtro);
         }
 
         if($request->has('attrib')){
-            $attrib = $request->attrib;
-            $ordens = $ordens->selectRaw($attrib)->get()->sortByDesc("updated_at");
-        }else{
-            $ordens = $ordens->get()->sortByDesc("updated_at");
+            $ordemRepository->selectAttribs($request->attrib);
         }
 
+        $ordemRepository->charge('updated_at');
 
-        return response()->json($ordens, 200);
+
+        return response()->json($ordemRepository, 200);
     }
 
     

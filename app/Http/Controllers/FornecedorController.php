@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Fornecedor;
+use App\Repositories\FornecedorRepository;
 
 class FornecedorController extends Controller
 {
@@ -21,35 +22,28 @@ class FornecedorController extends Controller
 
     public function index(Request $request)
     {
-        $fornecedores = array();
+
+        $fornecedorRepository = new FornecedorRepository($this->fornecedor);
 
         if($request->has('attrib_ordens')){
-            $attrib_ordens = $request->attrib_ordens;
-            $fornecedores = $this->fornecedor->with('ordens:id,'.$attrib_ordens);
+            $attrib_ordens = 'ordens:id,'.$request->attrib_ordens;
+            $fornecedorRepository->selectAttribRelacionados($attrib_ordens);
         }else{
-            $fornecedores = $this->fornecedor->with('ordens');
+            $fornecedorRepository->selectAttribRelacionados('ordens');
         }
 
         if($request->has('filtro')){
-            // dd($request->filtro);
-            $filtro = explode(';', $request->filtro);
-            // dd($filtro);
-            foreach ($filtro as  $value) {
-                $condicoes = explode(':', $value);
-                // dd($condicoes);
-                $fornecedores = $fornecedores->where($condicoes[0], $condicoes[1], $condicoes[2]);
-            }
-            
+            $fornecedorRepository->filtro($request->filtro);
         }
 
         if($request->has('attrib')){
-            $attrib = $request->attrib;
-            $fornecedores = $fornecedores->selectRaw($attrib)->get()->sortByDesc('updated_at');
+            $fornecedorRepository->selectAttribs($request->attrib);
+            $fornecedorRepository->charge('updated_at');
         }else{
-            $fornecedores = $fornecedores->get()->sortByDesc('updated_at');
+            $fornecedorRepository->charge('updated_at');
         }
-     
-        return response()->json($fornecedores, 200);
+   
+        return response()->json($fornecedorRepository, 200);
 
     }
         
@@ -96,7 +90,6 @@ class FornecedorController extends Controller
         if($request->method() === 'PATCH'){
             $dynamicRules = array();
             foreach ($this->fornecedor->rules() as $input => $rule) {
-                               
                 if(array_key_exists($input, $request->all())){
                     $dynamicRules[$input] = $rule;
                 }

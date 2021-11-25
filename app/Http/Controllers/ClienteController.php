@@ -5,13 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Cliente;
 use Illuminate\Support\Facades\Storage;
+use App\Repositories\ClienteRepository;
 
 class ClienteController extends Controller
 {
     public function __construct(Cliente $cliente){
         $this->cliente = $cliente;
+        
         //  Fazendo set $this->cliente com $cliente
     }
+
+    
     
     /**
      * Display a listing of the resource.
@@ -19,39 +23,29 @@ class ClienteController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    
-
     public function index(Request $request)
     {
-        $clientes = array();
+        $clienteRepository = new ClienteRepository($this->cliente);
 
         if($request->has('attrib_ordens')){
-            $attrib_ordens = $request->attrib_ordens;
-            $clientes = $this->cliente->with('ordens:id,'.$attrib_ordens);
+            $attrib_ordens = 'ordens:id,'.$request->attrib_ordens;
+            $clienteRepository->selectAttribRelacionados($attrib_ordens);
         }else{
-            $clientes = $this->cliente->with('ordens');
+            $clienteRepository->selectAttribRelacionados('ordens');
         }
 
         if($request->has('filtro')){
-            // dd($request->filtro);
-            $filtro = explode(';', $request->filtro);
-            // dd($filtro);
-            foreach ($filtro as  $value) {
-                $condicoes = explode(':', $value);
-                // dd($condicoes);
-                $clientes = $clientes->where($condicoes[0], $condicoes[1], $condicoes[2]);
-            }
-            
+            $clienteRepository->filtro($request->filtro);
         }
 
         if($request->has('attrib')){
-            $attrib = $request->attrib;
-            $clientes = $clientes->selectRaw($attrib)->get()->sortByDesc('updated_at');
-        }else{
-            $clientes = $clientes->get()->sortByDesc('updated_at');
+            $clienteRepository->selectAttribs($request->attrib);
         }
-     
-        return response()->json($clientes, 200);
+
+        $clienteRepository->charge('updated_at');
+
+
+        return response()->json($clienteRepository, 200);
  
     }
 
@@ -63,8 +57,10 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
+        
         // Validation Rules
         $request->validate($this->cliente->rules(), $this->cliente->feedback());
+        
 
         // Attributes without images
         $cliente = $this->cliente->create([

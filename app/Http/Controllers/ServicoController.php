@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Servico;
+use App\Repositories\ServicoRepository;
 
 class ServicoController extends Controller
 {
@@ -20,35 +21,29 @@ class ServicoController extends Controller
 
     public function index(Request $request)
     {
-        $servicos = array();
+        $servicoRepository = new ServicoRepository($this->servico);
 
         if($request->has('attrib_ordens')){
-            $attrib_ordens = $request->attrib_ordens;
-            $servicos = $this->servico->with('ordens:id,'.$attrib_ordens);
+            $attrib_ordens = 'ordens:id,'.$request->attrib_ordens;
+            $servicoRepository->selectAttribRelacionados($attrib_ordens);
         }else{
-            $servicos = $this->servico->with('ordens');
+            $servicoRepository->selectAttribRelacionados('ordens');
         }
 
         if($request->has('filtro')){
-            // dd($request->filtro);
-            $filtro = explode(';', $request->filtro);
-            // dd($filtro);
-            foreach ($filtro as  $value) {
-                $condicoes = explode(':', $value);
-                // dd($condicoes);
-                $servicos = $servicos->where($condicoes[0], $condicoes[1], $condicoes[2]);
-            }
-            
+            $servicoRepository->filtro($request->filtro);
         }
 
         if($request->has('attrib')){
-            $attrib = $request->attrib;
-            $servicos = $servicos->selectRaw($attrib)->get()->sortByDesc('updated_at');
+            $servicoRepository->selectAttribs($request->attrib);
+            $servicoRepository->charge('updated_at');
         }else{
-            $servicos = $servicos->get()->sortByDesc('updated_at');
+            $servicoRepository->charge('updated_at');
+
         }
-     
-        return response()->json($servicos, 200);}
+
+        return response()->json($servicoRepository, 200);
+    }
 
     /**
      * Store a newly created resource in storage.
