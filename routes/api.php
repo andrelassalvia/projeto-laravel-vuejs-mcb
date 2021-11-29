@@ -22,3 +22,8 @@ Route::apiresource('cliente', 'ClienteController');
 Route::apiresource('fornecedor', 'FornecedorController');
 Route::apiresource('servico', 'ServicoController');
 Route::apiresource('ordem', 'OrdemController');
+
+Route::post('login', 'AuthController@login');
+Route::post('logout', 'AuthController@logout');
+Route::post('refresh', 'AuthController@refresh');
+Route::post('me', 'AuthController@me');
