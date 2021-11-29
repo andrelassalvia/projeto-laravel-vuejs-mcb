@@ -89,21 +89,14 @@ class OrdemController extends Controller
     
     public function update(Request $request, $id)
     {
+        $ordemRepository = new OrdemRepository($this->ordem);
         if($request->method() === 'PATCH'){
-            $dynamicRules = array();
-            foreach ($this->ordem->rules() as $input => $rule) {
-                               
-                if(array_key_exists($input, $request->all())){
-                    $dynamicRules[$input] = $rule;
-                }
-            }
-            $request->validate($dynamicRules, $this->ordem->feedback());
+            $ordemRepository->dynamicRulesUpdate($request);
         }else{
 
             $request->validate($this->ordem->rules(), $this->ordem->feedback());
         }
         
-
         $ordem = $this->ordem->find($id);
         if($ordem === null){
             return response(['erro' => 'ordem procurada não está cadastrada'], 404);

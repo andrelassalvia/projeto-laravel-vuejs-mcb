@@ -82,16 +82,10 @@ class ServicoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // dd($request);
+        $servicoRepository = new ServicoRepository($this->servico);
         
         if($request->method() === 'PATCH'){
-            $dynamicRules = array();
-            foreach ($this->servico->rules() as $input => $rule) {
-                if(array_key_exists($input, $this->servico->rules())){
-                    $dynamicRules[$input] = $rule;
-                }
-            }
-            $request->validate($dynamicRules, $this->servico->feedback());
+            $servicoRepository->dynamicRulesUpdate($request);
         }else{
 
             $request->validate($this->servico->rules(), $this->servico->feedback());

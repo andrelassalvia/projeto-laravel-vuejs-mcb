@@ -85,22 +85,14 @@ class FornecedorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // dd($request->all());
-        
+        $fornecedorRepository = new FornecedorRepository($this->fornecedor);
         if($request->method() === 'PATCH'){
-            $dynamicRules = array();
-            foreach ($this->fornecedor->rules() as $input => $rule) {
-                if(array_key_exists($input, $request->all())){
-                    $dynamicRules[$input] = $rule;
-                }
-            }
-            $request->validate($dynamicRules, $this->fornecedor->feedback());
+            $fornecedorRepository->dynamicRulesUpdate($request);
+            
         }else{
-
             $request->validate($this->fornecedor->rules(), $this->fornecedor->feedback());
         }
         
-
         $fornecedor = $this->fornecedor->find($id);
         if($fornecedor === null){
             return response(['erro' => 'Fornecedor procurado não está cadastrado'], 404);

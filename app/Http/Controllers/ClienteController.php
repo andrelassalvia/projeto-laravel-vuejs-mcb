@@ -139,19 +139,15 @@ class ClienteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // Validacao para PATCH
-        if($request->method() === 'PATCH'){
-            $dynamicRules = array();
-            foreach ($this->cliente->rules() as $input => $rule) {
-                if(array_key_exists($input, $request->all())){
-                    $dynamicRules[$input] = $rule;
-                }
-            }
-            $request->validate($dynamicRules, $this->cliente->feedback());
+        $clienteRepository = new ClienteRepository($this->cliente);
+       // Validacao para PATCH
+       if($request->method() === 'PATCH'){
+           $clienteRepository->dynamicRulesUpdate($request);
+        
         }else{
-
-            $request->validate($this->cliente->rules(), $this->cliente->feedback());
-        }
+        $request->validate($this->cliente->rules(), $this->cliente->feedback());
+    }
+            
 
         // Encontrando o cliente
         $cliente = $this->cliente->find($id);
