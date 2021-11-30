@@ -17,16 +17,17 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+// Rotas privadas
 Route::prefix('v1')->middleware('jwt.auth')->group(function(){
     Route::apiresource('cliente', 'ClienteController');
     Route::apiresource('fornecedor', 'FornecedorController');
     Route::apiresource('servico', 'ServicoController');
     Route::apiresource('ordem', 'OrdemController');
-
+    Route::post('me', 'AuthController@me');
 });
 
-
+// Rotas Publicas
 Route::post('login', 'AuthController@login');
 Route::post('logout', 'AuthController@logout');
 Route::post('refresh', 'AuthController@refresh');
-Route::post('me', 'AuthController@me');

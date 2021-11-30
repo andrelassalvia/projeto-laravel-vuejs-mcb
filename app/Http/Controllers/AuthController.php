@@ -30,7 +30,7 @@ class AuthController extends Controller
     public function refresh(){
         return 'refresh';
     }
-    public function me(){
-        return 'me';
+    public function me(){ // qual foi o usuario que fez autenticacao e recebeu o token?
+        return response()->json(auth()->user(), 200);
     }
 }
