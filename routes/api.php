@@ -17,11 +17,14 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::prefix('v1')->middleware('jwt.auth')->group(function(){
+    Route::apiresource('cliente', 'ClienteController');
+    Route::apiresource('fornecedor', 'FornecedorController');
+    Route::apiresource('servico', 'ServicoController');
+    Route::apiresource('ordem', 'OrdemController');
 
-Route::apiresource('cliente', 'ClienteController')->middleware('jwt.auth');
-Route::apiresource('fornecedor', 'FornecedorController')->middleware('jwt.auth');
-Route::apiresource('servico', 'ServicoController')->middleware('jwt.auth');
-Route::apiresource('ordem', 'OrdemController')->middleware('jwt.auth');
+});
+
 
 Route::post('login', 'AuthController@login');
 Route::post('logout', 'AuthController@logout');
