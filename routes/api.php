@@ -25,9 +25,9 @@ Route::prefix('v1')->middleware('jwt.auth')->group(function(){
     Route::apiresource('servico', 'ServicoController');
     Route::apiresource('ordem', 'OrdemController');
     Route::post('me', 'AuthController@me');
+    Route::post('refresh', 'AuthController@refresh');
 });
 
 // Rotas Publicas
 Route::post('login', 'AuthController@login');
 Route::post('logout', 'AuthController@logout');
-Route::post('refresh', 'AuthController@refresh');
