@@ -3,10 +3,15 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Login</div>
+                    <div class="card-header card-login">Login</div>
 
                     <div class="card-body">
                         <form method="POST" action="">
+                            <input
+                                type="hidden"
+                                name="_token"
+                                :value="token_csrf"
+                            />
                             <div class="form-group row">
                                 <label
                                     for="email"
@@ -95,4 +100,13 @@
     </div>
 </template>
 
-<script></script>
+<script>
+export default {
+    props: ["token_csrf"],
+};
+</script>
+<style>
+.card-login {
+    background-color: #e5dbff;
+}
+</style>
