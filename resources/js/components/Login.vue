@@ -3,7 +3,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header card-login">Login</div>
+                    <div class="card-login card-header">Login</div>
 
                     <div class="card-body">
                         <form method="POST" action="">
@@ -105,8 +105,3 @@ export default {
     props: ["token_csrf"],
 };
 </script>
-<style>
-.card-login {
-    background-color: #e5dbff;
-}
-</style>
