@@ -6,7 +6,11 @@
                     <div class="card-login card-header">Login</div>
 
                     <div class="card-body">
-                        <form method="POST" action="">
+                        <form
+                            method="POST"
+                            action=""
+                            @submit.prevent="login($event)"
+                        >
                             <input
                                 type="hidden"
                                 name="_token"
@@ -32,6 +36,7 @@
                                         required
                                         autocomplete="email"
                                         autofocus
+                                        v-model="email"
                                     />
                                 </div>
                             </div>
@@ -54,6 +59,7 @@
                                         name="password"
                                         required
                                         autocomplete="current-password"
+                                        v-model="password"
                                     />
                                 </div>
                             </div>
@@ -103,5 +109,31 @@
 <script>
 export default {
     props: ["token_csrf"],
+    data() {
+        return {
+            email: "",
+            password: "",
+        };
+    },
+    methods: {
+        login(e) {
+            const url = "http://localhost:8000/api/login";
+            let config = {
+                method: "post",
+                body: new URLSearchParams({
+                    email: this.email,
+                    password: this.password,
+                }),
+            };
+            fetch(url, config)
+                .then((response) => response.json())
+                .then((data) => {
+                    if (data.token) {
+                        document.cookie =
+                            "token=" + data.token + ";SameSite=Lax";
+                    }
+                }, e.target.submit());
+        },
+    },
 };
 </script>
