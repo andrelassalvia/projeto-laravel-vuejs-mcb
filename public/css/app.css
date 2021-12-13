@@ -11439,3 +11439,8 @@ main p {
     font-size: 16px;
   }
 }
+
+#logo {
+  height: 70px;
+  width: auto;
+}
