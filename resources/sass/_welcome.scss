@@ -1,1 +1,125 @@
+@mixin box-shadow($color) {
+    box-shadow: 0px 10px 20px 0px rgba($color, 0.1);
+}
 
+body {
+    margin-left: 15vw;
+    max-width: 70vw;
+    margin-right: auto;
+}
+// Header
+header {
+    min-height: 10vh;
+    .link {
+        margin: 20px;
+        font-size: 10.24px;
+        @include media-breakpoint-up(sm) {
+            font-size: 12.8px;
+        }
+        @include media-breakpoint-up(md) {
+            font-size: 16px;
+        }
+        @include media-breakpoint-up(lg) {
+            font-size: 25px;
+        }
+        @include media-breakpoint-up(lg) {
+            font-size: 16px;
+        }
+
+        border-radius: 100px;
+        border: $violet50 1px solid;
+    }
+    .head {
+        justify-content: center;
+        @include media-breakpoint-up(lg) {
+            justify-content: flex-end;
+        }
+    }
+    .link-login {
+        color: $violet900;
+    }
+    .link-register {
+        color: $violet900;
+    }
+
+    .link:hover {
+        background-color: $violet800;
+        transition-duration: 0.4s;
+        color: $gray200;
+    }
+}
+// Main
+main {
+    min-height: 70vh;
+    margin-top: 4vh;
+
+    #logo {
+        @include media-breakpoint-up(sm) {
+            height: 74px;
+            width: auto;
+        }
+        @include media-breakpoint-up(md) {
+            height: 70px;
+            width: auto;
+            margin-bottom: 5vh;
+        }
+        @include media-breakpoint-up(lg) {
+            height: 103px;
+            width: auto;
+        }
+        @include media-breakpoint-up(xl) {
+            margin-top: 10vh;
+        }
+        height: 50px;
+        width: auto;
+    }
+
+    .box {
+        @include box-shadow($gray600);
+        @include media-breakpoint-up(sm) {
+        }
+        @include media-breakpoint-up(md) {
+            margin-bottom: 4vh !important;
+        }
+    }
+
+    ion-icon {
+        @include media-breakpoint-up(md) {
+            font-size: 20px;
+        }
+        @include media-breakpoint-up(lg) {
+            font-size: 28px;
+        }
+        color: $violet900;
+        font-size: 14px;
+    }
+
+    h5 {
+        margin-bottom: 0;
+        font-size: 10.24px;
+        color: $gray700;
+        @include media-breakpoint-up(sm) {
+            font-size: 12.8px;
+        }
+        @include media-breakpoint-up(md) {
+            font-size: 16px;
+        }
+        @include media-breakpoint-up(lg) {
+            font-size: 24px;
+        }
+    }
+    p {
+        @include media-breakpoint-up(sm) {
+            font-size: 10.24px;
+        }
+        @include media-breakpoint-up(md) {
+            font-size: 12.8px;
+        }
+        @include media-breakpoint-up(lg) {
+            font-size: 16px;
+        }
+        font-size: 8.19px;
+        line-height: 1.5;
+        color: $gray600;
+    }
+}

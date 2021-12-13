@@ -19,35 +19,45 @@ $teal: #4dc0b5;
 $cyan: #6cb2eb;
 
 // Cores Padrao
-$indigo0: #edf2ff;
-$indigo1: #dbe4ff;
-$indigo2: #bac8ff;
-$indigo3: #91a7ff;
-$indigo4: #748ffc;
-$indigo5: #5c7cfa;
-$indigo6: #4c6ef5;
-$indigo7: #4263eb;
-$indigo8: #3b5bdb;
-$indigo9: #364fc7;
 
-$teal0: #e6fcf5;
-$teal1: #c3fae8;
-$teal2: #96f2d7;
-$teal3: #63e6be;
-$teal4: #38d9a9;
-$teal5: #20c997;
-$teal6: #12b886;
-$teal7: #0ca678;
-$teal8: #099268;
-$teal9: #087f5b;
+$gray50: #f9fafb;
+$gray100: #f3f4f6;
+$gray200: #e5e7eb;
+$gray300: #d1d5db;
+$gray400: #9ca3af;
+$gray500: #6b7280;
+$gray600: #4b5563;
+$gray700: #374151;
+$gray800: #1f2937;
+$gray900: #111827;
 
-$gray0: #f8f9fa;
-$gray1: #f1f3f5;
-$gray2: #e9ecef;
-$gray3: #dee2e6;
-$gray4: #ced4da;
-$gray5: #adb5bd;
-$gray6: #868e96;
-$gray7: #495057;
-$gray8: #343a40;
-$gray9: #212529;
+$violet50: #f5f3ff;
+$violet100: #ede9fe;
+$violet200: #ddd6fe;
+$violet300: #c4b5fd;
+$violet400: #a78bfa;
+$violet500: #8b5cf6;
+$violet600: #7c3aed;
+$violet700: #6d28d9;
+$violet800: #5b21b6;
+$violet900: #4c1d95;
+
+$lime50: #f7fee7;
+$lime100: #ecfccb;
+$lime200: #d9f99d;
+$lime300: #bef264;
+$lime400: #a3e635;
+$lime500: #84cc16;
+$lime600: #65a30d;
+$lime700: #4d7c0f;
+$lime800: #3f6212;
+$lime900: #365314;
+
+$grid-breakpoints: (
+    xs: 0,
+    sm: 576px,
+    md: 768px,
+    lg: 992px,
+    xl: 1200px,
+    xxl: 1400px,
+);

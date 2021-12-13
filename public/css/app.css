@@ -11287,5 +11287,155 @@ textarea.form-control-lg {
   }
 }
 .card-login {
-  background-color: #dbe4ff;
+  background-color: #ddd6fe;
+}
+
+body {
+  margin-left: 15vw;
+  max-width: 70vw;
+  margin-right: auto;
+}
+
+header {
+  min-height: 10vh;
+}
+header .link {
+  margin: 20px;
+  font-size: 10.24px;
+  border-radius: 100px;
+  border: #f5f3ff 1px solid;
+}
+@media (min-width: 576px) {
+  header .link {
+    font-size: 12.8px;
+  }
+}
+@media (min-width: 768px) {
+  header .link {
+    font-size: 16px;
+  }
+}
+@media (min-width: 992px) {
+  header .link {
+    font-size: 25px;
+  }
+}
+@media (min-width: 992px) {
+  header .link {
+    font-size: 16px;
+  }
+}
+header .head {
+  justify-content: center;
+}
+@media (min-width: 992px) {
+  header .head {
+    justify-content: flex-end;
+  }
+}
+header .link-login {
+  color: #4c1d95;
+}
+header .link-register {
+  color: #4c1d95;
+}
+header .link:hover {
+  background-color: #5b21b6;
+  transition-duration: 0.4s;
+  color: #e5e7eb;
+}
+
+main {
+  min-height: 70vh;
+  margin-top: 4vh;
+}
+main #logo {
+  height: 50px;
+  width: auto;
+}
+@media (min-width: 576px) {
+  main #logo {
+    height: 74px;
+    width: auto;
+  }
+}
+@media (min-width: 768px) {
+  main #logo {
+    height: 70px;
+    width: auto;
+    margin-bottom: 5vh;
+  }
+}
+@media (min-width: 992px) {
+  main #logo {
+    height: 103px;
+    width: auto;
+  }
+}
+@media (min-width: 1200px) {
+  main #logo {
+    margin-top: 10vh;
+  }
+}
+main .box {
+  box-shadow: 0px 10px 20px 0px rgba(75, 85, 99, 0.1);
+}
+@media (min-width: 768px) {
+  main .box {
+    margin-bottom: 4vh !important;
+  }
+}
+main ion-icon {
+  color: #4c1d95;
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  main ion-icon {
+    font-size: 20px;
+  }
+}
+@media (min-width: 992px) {
+  main ion-icon {
+    font-size: 28px;
+  }
+}
+main h5, main .h5 {
+  margin-bottom: 0;
+  font-size: 10.24px;
+  color: #374151;
+}
+@media (min-width: 576px) {
+  main h5, main .h5 {
+    font-size: 12.8px;
+  }
+}
+@media (min-width: 768px) {
+  main h5, main .h5 {
+    font-size: 16px;
+  }
+}
+@media (min-width: 992px) {
+  main h5, main .h5 {
+    font-size: 24px;
+  }
+}
+main p {
+  font-size: 8.19px;
+  line-height: 1.5;
+  color: #4b5563;
+}
+@media (min-width: 576px) {
+  main p {
+    font-size: 10.24px;
+  }
+}
+@media (min-width: 768px) {
+  main p {
+    font-size: 12.8px;
+  }
+}
+@media (min-width: 992px) {
+  main p {
+    font-size: 16px;
+  }
 }
