@@ -1,3 +1,22 @@
-.card-login {
-    background-color: $violet200;
+.btn-violet-outline{
+    border: 1px solid $violet200;
+    border-radius: 100px;
+    color: $violet900;
+}
+
+.btn-violet-outline:hover{
+    background-color: $violet600;
+    transition-duration: 0.4s;
+    color: $gray200;
+}
+
+.card{
+    color: $violet900;
+    border-color: $violet200;
+}
+.card-header{
+    border-bottom: 1px solid $violet200;
+}
+#email, #password, #remember{
+    border: 1px solid $violet200;
 }

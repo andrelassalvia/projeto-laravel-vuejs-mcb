@@ -1,8 +1,8 @@
 <template>
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
+            <div class="col-md-6">
+                <div class="card card-border">
                     <div class="card-login card-header">Login</div>
 
                     <div class="card-body">
@@ -16,7 +16,7 @@
                                 name="_token"
                                 :value="token_csrf"
                             />
-                            <div class="form-group row">
+                            <div class="form-group row mb-3">
                                 <label
                                     for="email"
                                     class="
@@ -41,7 +41,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group row">
+                            <div class="form-group row mb-4">
                                 <label
                                     for="password"
                                     class="
@@ -64,7 +64,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group row">
+                            <div class="form-group row mb-1">
                                 <div class="col-md-6 offset-md-4">
                                     <div class="form-check">
                                         <input
@@ -88,7 +88,7 @@
                                 <div class="col-md-8 offset-md-4">
                                     <button
                                         type="submit"
-                                        class="btn btn-primary"
+                                        class="btn btn-violet-outline"
                                     >
                                         Login
                                     </button>

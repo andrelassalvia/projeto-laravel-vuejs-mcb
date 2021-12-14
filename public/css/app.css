@@ -11286,8 +11286,29 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
-.card-login {
-  background-color: #ddd6fe;
+.btn-violet-outline {
+  border: 1px solid #ddd6fe;
+  border-radius: 100px;
+  color: #4c1d95;
+}
+
+.btn-violet-outline:hover {
+  background-color: #7c3aed;
+  transition-duration: 0.4s;
+  color: #e5e7eb;
+}
+
+.card {
+  color: #4c1d95;
+  border-color: #ddd6fe;
+}
+
+.card-header {
+  border-bottom: 1px solid #ddd6fe;
+}
+
+#email, #password, #remember {
+  border: 1px solid #ddd6fe;
 }
 
 body {
@@ -11340,7 +11361,7 @@ header .link-register {
   color: #4c1d95;
 }
 header .link:hover {
-  background-color: #5b21b6;
+  background-color: #7c3aed;
   transition-duration: 0.4s;
   color: #e5e7eb;
 }
@@ -11443,4 +11464,21 @@ main p {
 #logo {
   height: 70px;
   width: auto;
+}
+
+.nav-link-color {
+  color: #4c1d95 !important;
+  border: 1px solid #ddd6fe;
+  border-radius: 100px;
+  margin-right: 10px;
+}
+
+.nav-link-color:hover {
+  background-color: #7c3aed;
+  transition-duration: 0.4s;
+  color: #e5e7eb !important;
+}
+
+.card-body, .card-header {
+  color: #4c1d95 !important;
 }
