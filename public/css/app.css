@@ -11470,7 +11470,7 @@ main p {
   color: #4c1d95 !important;
   border: 1px solid #ddd6fe;
   border-radius: 100px;
-  margin-right: 10px;
+  margin: 20px;
 }
 
 .nav-link-color:hover {

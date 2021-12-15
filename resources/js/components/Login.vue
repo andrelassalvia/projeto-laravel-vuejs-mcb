@@ -116,6 +116,7 @@ export default {
         };
     },
     methods: {
+        // metodo para formar a url que sera passada com os atributos (como fazemos no postman)
         login(e) {
             const url = "http://localhost:8000/api/login";
             let config = {

@@ -1,16 +1,15 @@
-#logo{
-  height: 70px;
-  width:auto;
+#logo {
+    height: 70px;
+    width: auto;
 }
-.nav-link-color{
-  color: $violet900 !important;
-  border: 1px solid $violet200;
-  border-radius: 100px;
-  margin-right:10px;
-  
+.nav-link-color {
+    color: $violet900 !important;
+    border: 1px solid $violet200;
+    border-radius: 100px;
+    margin: 20px;
 }
-.nav-link-color:hover{
-  background-color: $violet600;
-  transition-duration: 0.4s;
-  color: $gray200 !important;
+.nav-link-color:hover {
+    background-color: $violet600;
+    transition-duration: 0.4s;
+    color: $gray200 !important;
 }
