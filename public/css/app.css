@@ -11307,8 +11307,17 @@ textarea.form-control-lg {
   border-bottom: 1px solid #ddd6fe;
 }
 
-#email, #password, #remember {
+#email,
+#password,
+#remember {
   border: 1px solid #ddd6fe;
+}
+
+span {
+  text-align: center;
+  margin-top: 0.35rem !important;
+  font-size: 0.875em;
+  color: #e3342f;
 }
 
 body {

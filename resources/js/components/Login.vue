@@ -39,6 +39,7 @@
                                         v-model="email"
                                     />
                                 </div>
+                                <span>{{ "Usuário não identificado" }}</span>
                             </div>
 
                             <div class="form-group row mb-4">

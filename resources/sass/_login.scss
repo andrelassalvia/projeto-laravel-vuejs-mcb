@@ -1,22 +1,35 @@
-.btn-violet-outline{
+.btn-violet-outline {
     border: 1px solid $violet200;
     border-radius: 100px;
     color: $violet900;
 }
 
-.btn-violet-outline:hover{
+.btn-violet-outline:hover {
     background-color: $violet600;
     transition-duration: 0.4s;
     color: $gray200;
 }
 
-.card{
+.card {
     color: $violet900;
     border-color: $violet200;
 }
-.card-header{
+.card-header {
     border-bottom: 1px solid $violet200;
 }
-#email, #password, #remember{
+#email,
+#password,
+#remember {
     border: 1px solid $violet200;
+}
+
+span {
+    // display: none;
+    text-align: center;
+    // width: 50% !important;
+    margin-top: 0.35rem !important;
+    font-size: 0.875em;
+    color: #e3342f;
+    // margin-left: auto;
+    // margin-right: auto;
 }
