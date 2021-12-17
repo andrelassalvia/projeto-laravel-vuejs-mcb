@@ -11313,13 +11313,6 @@ textarea.form-control-lg {
   border: 1px solid #ddd6fe;
 }
 
-span {
-  text-align: center;
-  margin-top: 0.35rem !important;
-  font-size: 0.875em;
-  color: #e3342f;
-}
-
 body {
   margin-left: 15vw;
   max-width: 70vw;
@@ -11490,4 +11483,44 @@ main p {
 
 .card-body, .card-header {
   color: #4c1d95 !important;
+}
+
+.esquerda {
+  background-color: coral;
+  height: 70vh;
+  padding: 10px;
+  margin: 10px;
+}
+
+.direita {
+  background-color: green;
+  height: 70vh;
+  padding: 10px;
+  margin: 10px;
+}
+
+.servicos {
+  background-color: red;
+  height: 45%;
+  margin: 10px;
+}
+
+.status {
+  background-color: yellow;
+  height: 45%;
+  margin: 10px;
+}
+
+.border-search-color {
+  border-color: #dee2e6;
+}
+
+#search-button:hover {
+  background-color: #ddd6fe;
+  transition-duration: 0.4s;
+  color: #e5e7eb !important;
+}
+
+#search {
+  margin-bottom: 5vh;
 }

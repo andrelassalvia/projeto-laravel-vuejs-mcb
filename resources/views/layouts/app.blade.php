@@ -43,7 +43,7 @@
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <li><a class="dropdown-item" href="{{route('clientes_cadastro')}}">Cadastro</a></li>
-                                    <li><a class="dropdown-item" href="#">Consulta</a></li>
+                                    <li><a class="dropdown-item" href="{{route('clientes_consulta')}}">Consulta</a></li>
                                 </ul>
                             </li>
                             <li class="nav-item dropdown">

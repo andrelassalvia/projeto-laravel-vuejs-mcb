@@ -33,6 +33,17 @@ Vue.component(
     "clientescadastro-component",
     require("./components/ClientesCadastro.vue").default
 );
+Vue.component(
+    "clientedados-component",
+    require("./components/ClienteDados.vue").default
+);
+Vue.component(
+    "clientesconsulta-component",
+    require("./components/ClientesConsulta.vue").default
+);
+Vue.component("table-component", require("./components/Table.vue").default);
+Vue.component("card-component", require("./components/Card.vue").default);
+Vue.component("button-component", require("./components/Button.vue").default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

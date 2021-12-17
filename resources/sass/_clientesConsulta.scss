@@ -1,0 +1,11 @@
+.border-search-color {
+    border-color: #dee2e6;
+}
+#search-button:hover {
+    background-color: $violet200;
+    transition-duration: 0.4s;
+    color: $gray200 !important;
+}
+#search {
+    margin-bottom: 5vh;
+}

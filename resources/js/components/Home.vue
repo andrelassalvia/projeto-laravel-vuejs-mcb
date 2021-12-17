@@ -2,13 +2,9 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">Bem-vindo</div>
-
-                    <div class="card-body">
-                        <p>Apresentar Indicadores do sistema</p>
-                    </div>
-                </div>
+                <card-component titulo="Bem-vindo" botao="ok"
+                    >Apresentar indicadores do sistema
+                </card-component>
             </div>
         </div>
     </div>
