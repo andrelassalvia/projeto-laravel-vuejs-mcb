@@ -5255,8 +5255,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ["botao", "dt_toggle", "dt_target"]
+  props: ["botao", "dt_toggle", "dt_target", "dt_dismiss"]
 });
 
 /***/ }),
@@ -5350,6 +5351,119 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -5670,13 +5784,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -40186,6 +40293,7 @@ var render = function () {
         name: "violeta",
         "data-bs-toggle": _vm.dt_toggle,
         "data-bs-target": _vm.dt_target,
+        "data-bs-dismiss": _vm.dt_dismiss,
       },
     },
     [_vm._v("\n    " + _vm._s(_vm.botao) + "\n")]
@@ -40446,6 +40554,153 @@ var render = function () {
       _vm._v(" "),
       _c("modal-component", {
         attrs: { id: "modalCliente", titulo: "Adicionar Cliente" },
+        scopedSlots: _vm._u([
+          {
+            key: "conteudo",
+            fn: function () {
+              return [
+                _c("div", { staticClass: "mb-3" }, [
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: { type: "text", placeholder: "Nome completo" },
+                  }),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "mb-3" }, [
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: { type: "text", placeholder: "Telefone" },
+                  }),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "mb-3" }, [
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: { type: "email", placeholder: "email@dominio.com" },
+                  }),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "mb-3" }, [
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: { type: "text", placeholder: "País residência" },
+                  }),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "mb-3" }, [
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: { type: "text", placeholder: "Cidade residência" },
+                  }),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "mb-3" }, [
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: { type: "text", placeholder: "Estado BR" },
+                  }),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "mb-3" }, [
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: { type: "text", placeholder: "Cidade BR" },
+                  }),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "mb-3" }, [
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: { type: "text", placeholder: "Cpf" },
+                  }),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "mb-3" }, [
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: { type: "file", placeholder: "Imagem cpf" },
+                  }),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "mb-3" }, [
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: { type: "text", placeholder: "Rg" },
+                  }),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "mb-3" }, [
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: { type: "file", placeholder: "Imagem rg" },
+                  }),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "mb-3" }, [
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: { type: "text", placeholder: "Passaporte" },
+                  }),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "mb-3" }, [
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: { type: "file", placeholder: "Imagem passaporte" },
+                  }),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "mb-3" }, [
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: { type: "text", placeholder: "Cnh" },
+                  }),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "mb-3" }, [
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: { type: "file", placeholder: "Imagem Cnh" },
+                  }),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group mb-3" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "form-label",
+                      attrs: { for: "dataNascimento" },
+                    },
+                    [_vm._v("Data Nascimento")]
+                  ),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "date",
+                      id: "dataNascimento",
+                      value: "1980-01-01",
+                    },
+                  }),
+                ]),
+              ]
+            },
+            proxy: true,
+          },
+          {
+            key: "footer",
+            fn: function () {
+              return [
+                _c("button-component", {
+                  attrs: { botao: "Fechar", dt_dismiss: "modal" },
+                }),
+                _vm._v(" "),
+                _c("button-component", { attrs: { botao: "Salvar" } }),
+              ]
+            },
+            proxy: true,
+          },
+        ]),
       }),
     ],
     1
@@ -40812,38 +41067,21 @@ var render = function () {
               }),
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "modal-body" }, [_vm._v("...")]),
+            _c(
+              "div",
+              { staticClass: "modal-body scroll" },
+              [_vm._t("conteudo")],
+              2
+            ),
             _vm._v(" "),
-            _vm._m(0),
+            _c("div", { staticClass: "modal-footer" }, [_vm._t("footer")], 2),
           ]),
         ]),
       ]
     ),
   ])
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-footer" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-violet-outline",
-          attrs: { type: "button", "data-bs-dismiss": "modal" },
-        },
-        [_vm._v("\n                        Fechar\n                    ")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        { staticClass: "btn btn-violet-outline", attrs: { type: "button" } },
-        [_vm._v("\n                        Salvar\n                    ")]
-      ),
-    ])
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

@@ -21,18 +21,11 @@
                             aria-label="Close"
                         ></button>
                     </div>
-                    <div class="modal-body">...</div>
+                    <div class="modal-body scroll">
+                        <slot name="conteudo"></slot>
+                    </div>
                     <div class="modal-footer">
-                        <button
-                            type="button"
-                            class="btn btn-violet-outline"
-                            data-bs-dismiss="modal"
-                        >
-                            Fechar
-                        </button>
-                        <button type="button" class="btn btn-violet-outline">
-                            Salvar
-                        </button>
+                        <slot name="footer"></slot>
                     </div>
                 </div>
             </div>

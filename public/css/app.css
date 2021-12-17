@@ -11524,3 +11524,8 @@ main p {
 #search {
   margin-bottom: 5vh;
 }
+
+.scroll {
+  height: 75vh;
+  overflow-y: scroll;
+}
