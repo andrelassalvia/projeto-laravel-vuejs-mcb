@@ -71,10 +71,19 @@
                     </template>
                     <template v-slot:rodape>
                         <button-component botao="Selecionar"></button-component>
+                        <button-component
+                            botao="Adicionar Cliente"
+                            dt_toggle="modal"
+                            dt_target="#modalCliente"
+                        >
+                        </button-component>
                     </template>
                 </card-component>
             </div>
         </div>
+
+        <modal-component id="modalCliente" titulo="Adicionar Cliente">
+        </modal-component>
     </div>
 </template>
 

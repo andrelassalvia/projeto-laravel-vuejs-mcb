@@ -35,39 +35,37 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
-                        @auth
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Clientes
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" href="{{route('clientes_cadastro')}}">Cadastro</a></li>
-                                    <li><a class="dropdown-item" href="{{route('clientes_consulta')}}">Consulta</a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Fornecedores</a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" href="#">Cadastro</a></li>
-                                    <li><a class="dropdown-item" href="#">Consulta</a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Serviços</a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" href="#">Cadastro</a></li>
-                                    <li><a class="dropdown-item" href="#">Consulta</a></li>
-                                </ul>
-                            </li>
-                            
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Ordens de serviço</a>
-                            </li>
-
-                        @endauth
-
-                    </ul>
+                    <div class="col-8 d-flex justify-content-center">
+                        <ul class="navbar-nav">
+                            @auth
+                                <li class="nav-item ">
+                                    <a class="nav-link" aria-current="page" href="{{route('clientes_consulta')}}">
+                                        Clientes
+                                    </a>
+                                </li>
+                                <li class="nav-item dropdown ms-3">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Fornecedores</a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <li><a class="dropdown-item" href="#">Cadastro</a></li>
+                                        <li><a class="dropdown-item" href="#">Consulta</a></li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item dropdown ms-3">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Serviços</a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <li><a class="dropdown-item" href="#">Cadastro</a></li>
+                                        <li><a class="dropdown-item" href="#">Consulta</a></li>
+                                    </ul>
+                                </li>
+                                
+                                <li class="nav-item ms-3">
+                                    <a class="nav-link" href="#">Ordens de serviço</a>
+                                </li>
+    
+                            @endauth
+    
+                        </ul>
+                    </div>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
