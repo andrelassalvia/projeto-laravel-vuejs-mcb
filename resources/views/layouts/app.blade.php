@@ -39,7 +39,7 @@
                         <ul class="navbar-nav">
                             @auth
                                 <li class="nav-item ">
-                                    <a class="nav-link" aria-current="page" href="{{route('clientes_consulta')}}">
+                                    <a class="nav-link" aria-current="page" href="{{route('clientes')}}">
                                         Clientes
                                     </a>
                                 </li>

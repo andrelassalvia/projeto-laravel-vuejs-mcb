@@ -34,6 +34,9 @@
 </template>
 <script>
 export default {
-    props: ["id", "titulo"],
+    props: {
+        id: String,
+        titulo: String,
+    },
 };
 </script>

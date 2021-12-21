@@ -38,8 +38,8 @@ Vue.component(
     require("./components/ClienteDados.vue").default
 );
 Vue.component(
-    "clientesconsulta-component",
-    require("./components/ClientesConsulta.vue").default
+    "clientes-component",
+    require("./components/Clientes.vue").default
 );
 Vue.component("table-component", require("./components/Table.vue").default);
 Vue.component("card-component", require("./components/Card.vue").default);

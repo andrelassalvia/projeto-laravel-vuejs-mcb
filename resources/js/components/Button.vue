@@ -1,7 +1,7 @@
 <template>
     <!-- botao violeta -->
     <button
-        type="button"
+        :type="tipo"
         name="violeta"
         class="btn-violet-outline"
         :data-bs-toggle="dt_toggle"
@@ -13,6 +13,6 @@
 </template>
 <script>
 export default {
-    props: ["botao", "dt_toggle", "dt_target", "dt_dismiss"],
+    props: ["botao", "dt_toggle", "dt_target", "dt_dismiss", "tipo"],
 };
 </script>

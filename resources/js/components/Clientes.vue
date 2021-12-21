@@ -1,5 +1,6 @@
 <template>
     <div class="container">
+        <!-- BARRA DE BUSCAS -->
         <div class="row justify-content-center">
             <div class="col-9">
                 <div class="input-group" id="search">
@@ -46,23 +47,10 @@
                         placeholder="cpf"
                         id="example-search-input"
                     />
-                    <span class="search-button">
-                        <button
-                            class="
-                                btn btn-outline-secondary btn-lg
-                                border-start-0
-                                rounded-pill rounded-start
-                                border-search-color
-                            "
-                            type="button"
-                            id="search-button"
-                        >
-                            <ion-icon name="search-outline"></ion-icon>
-                        </button>
-                    </span>
                 </div>
             </div>
         </div>
+        <!-- LISTAGEM DE CLIENTES -->
         <div class="row justify-content-center">
             <div class="col-11">
                 <card-component titulo="Lista de Clientes">
@@ -81,7 +69,7 @@
                 </card-component>
             </div>
         </div>
-
+        <!-- MODAL PARA ADICAO DE CLIENTES -->
         <modal-component id="modalCliente" titulo="Adicionar Cliente">
             <template v-slot:conteudo>
                 <div class="mb-3">
@@ -89,6 +77,7 @@
                         type="text"
                         class="form-control"
                         placeholder="Nome completo"
+                        v-model="nome"
                     />
                 </div>
                 <div class="mb-3">
@@ -96,6 +85,7 @@
                         type="text"
                         class="form-control"
                         placeholder="Telefone"
+                        v-model="telefone"
                     />
                 </div>
                 <div class="mb-3">
@@ -103,6 +93,7 @@
                         type="email"
                         class="form-control"
                         placeholder="email@dominio.com"
+                        v-model="email"
                     />
                 </div>
                 <div class="mb-3">
@@ -110,6 +101,7 @@
                         type="text"
                         class="form-control"
                         placeholder="País residência"
+                        v-model="paisResidencia"
                     />
                 </div>
                 <div class="mb-3">
@@ -117,6 +109,7 @@
                         type="text"
                         class="form-control"
                         placeholder="Cidade residência"
+                        v-model="cidadeResidencia"
                     />
                 </div>
                 <div class="mb-3">
@@ -124,6 +117,7 @@
                         type="text"
                         class="form-control"
                         placeholder="Estado BR"
+                        v-model="estadoBr"
                     />
                 </div>
                 <div class="mb-3">
@@ -131,26 +125,39 @@
                         type="text"
                         class="form-control"
                         placeholder="Cidade BR"
+                        v-model="cidadeBr"
                     />
                 </div>
                 <div class="mb-3">
-                    <input type="text" class="form-control" placeholder="Cpf" />
+                    <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Cpf"
+                        v-model="cpfNumber"
+                    />
                 </div>
                 <div class="mb-3">
                     <input
                         type="file"
                         class="form-control"
                         placeholder="Imagem cpf"
+                        @change="carregarImagemCpf($event)"
                     />
                 </div>
                 <div class="mb-3">
-                    <input type="text" class="form-control" placeholder="Rg" />
+                    <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Rg"
+                        v-model="rgNumber"
+                    />
                 </div>
                 <div class="mb-3">
                     <input
                         type="file"
                         class="form-control"
                         placeholder="Imagem rg"
+                        @change="carregarImagemRg($event)"
                     />
                 </div>
                 <div class="mb-3">
@@ -158,6 +165,7 @@
                         type="text"
                         class="form-control"
                         placeholder="Passaporte"
+                        v-model="passaporteNumber"
                     />
                 </div>
                 <div class="mb-3">
@@ -165,16 +173,23 @@
                         type="file"
                         class="form-control"
                         placeholder="Imagem passaporte"
+                        @change="carregarImagemPassaporte($event)"
                     />
                 </div>
                 <div class="mb-3">
-                    <input type="text" class="form-control" placeholder="Cnh" />
+                    <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Cnh"
+                        v-model="cnhNumber"
+                    />
                 </div>
                 <div class="mb-3">
                     <input
                         type="file"
                         class="form-control"
                         placeholder="Imagem Cnh"
+                        @change="carregarImagemCnh($event)"
                     />
                 </div>
                 <div class="form-group mb-3">
@@ -186,15 +201,23 @@
                         id="dataNascimento"
                         class="form-control"
                         value="1980-01-01"
+                        v-model="dataNascimento"
                     />
                 </div>
             </template>
+            <!-- FOOTER -->
             <template v-slot:footer>
                 <button-component
                     botao="Fechar"
                     dt_dismiss="modal"
                 ></button-component>
-                <button-component botao="Salvar"></button-component>
+                <button
+                    @click="salvar()"
+                    class="btn-violet-outline"
+                    type="button"
+                >
+                    Salvar
+                </button>
             </template>
         </modal-component>
     </div>
@@ -203,9 +226,76 @@
 <script>
 export default {
     props: [],
-    data() {},
+    data() {
+        return {
+            urlBase: "http://localhost:8000/api/v1/cliente",
+            nome: "",
+            telefone: "",
+            email: "",
+            paisResidencia: "",
+            cidadeResidencia: "",
+            estadoBr: "",
+            cidadeBr: "",
+            cpfNumber: "",
+            cpfImagem: [],
+            rgNumber: "",
+            rgImagem: [],
+            passaporteNumber: "",
+            passaporteImagem: [],
+            cnhNumber: "",
+            cnhImagem: [],
+            dataNascimento: "",
+        };
+    },
     methods: {
-        carregarLista() {},
+        carregarImagemCpf(e) {
+            this.cpfImagem = e.target.files;
+        },
+        carregarImagemRg(e) {
+            this.rgImagem = e.target.files;
+        },
+        carregarImagemPassaporte(e) {
+            this.passaporteImagem = e.target.files;
+        },
+        carregarImagemCnh(e) {
+            this.cnhImagem = e.target.files;
+        },
+        salvar() {
+            console.log(this.cpfImagem);
+            let formData = new FormData();
+            formData.append("nome", this.nome);
+            formData.append("telefone", this.telefone);
+            formData.append("email", this.email);
+            formData.append("pais_residencia", this.paisResidencia);
+            formData.append("cidade_residencia", this.cidadeResidencia);
+            formData.append("estado_br", this.estadoBr);
+            formData.append("cidade_br", this.cidadeBr);
+            formData.append("cpf", this.cpfNumber);
+            formData.append("cpf_imagem", this.cpfImagem[0]);
+            formData.append("rg", this.rgNumber);
+            formData.append("rg_imagem", this.rgImagem[0]);
+            formData.append("passaporte", this.passaporteNumber);
+            formData.append("passaporte_imagem", this.passaporteImagem[0]);
+            formData.append("cnh", this.cnhNumber);
+            formData.append("cnh_imagem", this.cnhImagem[0]);
+            formData.append("dt_nascimento", this.dataNascimento);
+
+            let config = {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                    Accept: "Application/json",
+                },
+            };
+
+            axios
+                .post(this.urlBase, formData, config)
+                .then((response) => {
+                    console.log(response);
+                })
+                .catch((errors) => {
+                    console.log(errors);
+                });
+        },
     },
 };
 </script>

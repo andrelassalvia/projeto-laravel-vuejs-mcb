@@ -26,6 +26,6 @@ Route::get('/clientes/cadastro', function(){
 Route::get('/cliente/dados', function(){
     return view ('app.cliente_dados');
 })->name('cliente_dados')->middleware('auth');
-Route::get('/clientes/consulta', function(){
-    return view ('app.clientes_consulta');
-})->name('clientes_consulta')->middleware('auth');
+Route::get('/clientes', function(){
+    return view ('app.clientes');
+})->name('clientes')->middleware('auth');
