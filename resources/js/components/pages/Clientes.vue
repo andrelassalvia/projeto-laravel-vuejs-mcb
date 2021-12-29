@@ -113,12 +113,7 @@
                     />
                 </div>
 
-                <dropdown text="Estado BR">
-                    <dropdownItem href="http://www.google.com">
-                        Item 1
-                    </dropdownItem>
-                    <dropdownItem> Item 2 </dropdownItem>
-                </dropdown>
+                <StateCity></StateCity>
 
                 <div class="mb-3">
                     <input
@@ -233,12 +228,11 @@
 </template>
 
 <script>
-import Dropdown from "../widgets/dropdowns/Dropdown.vue";
-import DropdownItem from "../widgets/dropdowns/DropdownItem.vue";
+import StateCity from "../widgets/StateCity.vue";
 
 export default {
     name: "Clientes",
-    components: { Dropdown, DropdownItem },
+    components: { StateCity },
 
     props: [],
     data() {

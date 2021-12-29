@@ -5299,8 +5299,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _widgets_dropdowns_Dropdown_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../widgets/dropdowns/Dropdown.vue */ "./resources/js/components/widgets/dropdowns/Dropdown.vue");
-/* harmony import */ var _widgets_dropdowns_DropdownItem_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../widgets/dropdowns/DropdownItem.vue */ "./resources/js/components/widgets/dropdowns/DropdownItem.vue");
+/* harmony import */ var _widgets_StateCity_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../widgets/StateCity.vue */ "./resources/js/components/widgets/StateCity.vue");
 //
 //
 //
@@ -5530,18 +5529,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Clientes",
   components: {
-    Dropdown: _widgets_dropdowns_Dropdown_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-    DropdownItem: _widgets_dropdowns_DropdownItem_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+    StateCity: _widgets_StateCity_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   props: [],
   data: function data() {
@@ -6101,6 +6093,66 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/widgets/StateCity.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/widgets/StateCity.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _dropdowns_Dropdown_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./dropdowns/Dropdown.vue */ "./resources/js/components/widgets/dropdowns/Dropdown.vue");
+/* harmony import */ var _dropdowns_DropdownItem_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./dropdowns/DropdownItem.vue */ "./resources/js/components/widgets/dropdowns/DropdownItem.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: "StateCity",
+  components: {
+    Dropdown: _dropdowns_Dropdown_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+    DropdownItem: _dropdowns_DropdownItem_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
+  data: function data() {
+    return {
+      urlBase: "http://localhost:8000/api/v1/estados",
+      states: [],
+      cities: [],
+      stateSelected: {}
+    };
+  },
+  methods: {
+    getStates: function getStates() {
+      var _this = this;
+
+      axios.get(this.urlBase).then(function (response) {
+        _this.states = response.data;
+      });
+    },
+    selectState: function selectState(state) {
+      this.stateSelected = state;
+    }
+  },
+  created: function created() {
+    this.getStates();
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/widgets/Table.vue?vue&type=script&lang=js&":
 /*!********************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/widgets/Table.vue?vue&type=script&lang=js& ***!
@@ -6331,6 +6383,7 @@ Vue.component("button-component", (__webpack_require__(/*! ./components/widgets/
 Vue.component("modal-component", (__webpack_require__(/*! ./components/widgets/Modal.vue */ "./resources/js/components/widgets/Modal.vue")["default"]));
 Vue.component("dropdown-component", (__webpack_require__(/*! ./components/widgets/dropdowns/Dropdown.vue */ "./resources/js/components/widgets/dropdowns/Dropdown.vue")["default"]));
 Vue.component("dropdownItem-component", (__webpack_require__(/*! ./components/widgets/dropdowns/DropdownItem.vue */ "./resources/js/components/widgets/dropdowns/DropdownItem.vue")["default"]));
+Vue.component("stateCity-component", (__webpack_require__(/*! ./components/widgets/StateCity.vue */ "./resources/js/components/widgets/StateCity.vue")["default"]));
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -40121,6 +40174,45 @@ component.options.__file = "resources/js/components/widgets/Modal.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/widgets/StateCity.vue":
+/*!*******************************************************!*\
+  !*** ./resources/js/components/widgets/StateCity.vue ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _StateCity_vue_vue_type_template_id_8c64953e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./StateCity.vue?vue&type=template&id=8c64953e& */ "./resources/js/components/widgets/StateCity.vue?vue&type=template&id=8c64953e&");
+/* harmony import */ var _StateCity_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./StateCity.vue?vue&type=script&lang=js& */ "./resources/js/components/widgets/StateCity.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _StateCity_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _StateCity_vue_vue_type_template_id_8c64953e___WEBPACK_IMPORTED_MODULE_0__.render,
+  _StateCity_vue_vue_type_template_id_8c64953e___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/widgets/StateCity.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/widgets/Table.vue":
 /*!***************************************************!*\
   !*** ./resources/js/components/widgets/Table.vue ***!
@@ -40406,6 +40498,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/widgets/StateCity.vue?vue&type=script&lang=js&":
+/*!********************************************************************************!*\
+  !*** ./resources/js/components/widgets/StateCity.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_StateCity_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./StateCity.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/widgets/StateCity.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_StateCity_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/widgets/Table.vue?vue&type=script&lang=js&":
 /*!****************************************************************************!*\
   !*** ./resources/js/components/widgets/Table.vue?vue&type=script&lang=js& ***!
@@ -40620,6 +40728,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Modal_vue_vue_type_template_id_4ed13c72___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Modal_vue_vue_type_template_id_4ed13c72___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Modal.vue?vue&type=template&id=4ed13c72& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/widgets/Modal.vue?vue&type=template&id=4ed13c72&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/widgets/StateCity.vue?vue&type=template&id=8c64953e&":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/components/widgets/StateCity.vue?vue&type=template&id=8c64953e& ***!
+  \**************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StateCity_vue_vue_type_template_id_8c64953e___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StateCity_vue_vue_type_template_id_8c64953e___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StateCity_vue_vue_type_template_id_8c64953e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./StateCity.vue?vue&type=template&id=8c64953e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/widgets/StateCity.vue?vue&type=template&id=8c64953e&");
 
 
 /***/ }),
@@ -40956,20 +41081,7 @@ var render = function () {
                   }),
                 ]),
                 _vm._v(" "),
-                _c(
-                  "dropdown",
-                  { attrs: { text: "Estado BR" } },
-                  [
-                    _c(
-                      "dropdownItem",
-                      { attrs: { href: "http://www.google.com" } },
-                      [_vm._v("\n                    Item 1\n                ")]
-                    ),
-                    _vm._v(" "),
-                    _c("dropdownItem", [_vm._v(" Item 2 ")]),
-                  ],
-                  1
-                ),
+                _c("StateCity"),
                 _vm._v(" "),
                 _c("div", { staticClass: "mb-3" }, [
                   _c("input", {
@@ -41949,6 +42061,55 @@ var render = function () {
       ]
     ),
   ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/widgets/StateCity.vue?vue&type=template&id=8c64953e&":
+/*!*****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/widgets/StateCity.vue?vue&type=template&id=8c64953e& ***!
+  \*****************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "dropdown",
+        { attrs: { text: _vm.stateSelected.name || "Estado BR" } },
+        _vm._l(_vm.states, function (state) {
+          return _c(
+            "dropdownItem",
+            {
+              key: state.id,
+              on: {
+                click: function ($event) {
+                  return _vm.selectState(state)
+                },
+              },
+            },
+            [_vm._v(_vm._s(state.name))]
+          )
+        }),
+        1
+      ),
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

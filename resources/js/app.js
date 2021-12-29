@@ -68,6 +68,10 @@ Vue.component(
     "dropdownItem-component",
     require("./components/widgets/dropdowns/DropdownItem.vue").default
 );
+Vue.component(
+    "stateCity-component",
+    require("./components/widgets/StateCity.vue").default
+);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

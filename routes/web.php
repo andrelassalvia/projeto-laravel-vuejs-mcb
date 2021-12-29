@@ -29,3 +29,6 @@ Route::get('/cliente/dados', function(){
 Route::get('/clientes', function(){
     return view ('app.clientes');
 })->name('clientes')->middleware('auth');
+Route::get('/estados', function(){
+    return view ('app.estados');
+})->name('estados');
