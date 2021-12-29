@@ -8,22 +8,25 @@
 @import "~bootstrap/scss/bootstrap";
 
 // Login
-@import "login";
+@import "./pages/login";
 
 // welcome
-@import "welcome";
+@import "./pages/welcome";
 
 // app.blade
-@import 'appBlade';
+@import './pages/appBlade';
 
 // register
-@import 'register';
+@import './pages/register';
 
 // cliente_dados
-@import 'clienteDados';
+@import './pages/clienteDados';
 
 // clientes_consulta
-@import 'clientesConsulta';
+@import './pages/clientesConsulta';
 
 // Modal
-@import 'modal';
+@import './components/modal';
+
+// Dropdown
+@import './components/dropdown';

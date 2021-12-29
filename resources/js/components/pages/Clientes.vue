@@ -112,6 +112,14 @@
                         v-model="cidadeResidencia"
                     />
                 </div>
+
+                <dropdown text="Estado BR">
+                    <dropdownItem href="http://www.google.com">
+                        Item 1
+                    </dropdownItem>
+                    <dropdownItem> Item 2 </dropdownItem>
+                </dropdown>
+
                 <div class="mb-3">
                     <input
                         type="text"
@@ -128,47 +136,49 @@
                         v-model="cidadeBr"
                     />
                 </div>
-                <div class="mb-3">
+                <div class="form-group mb-4">
+                    <label for="imagemCpf">Anexar CPF</label>
                     <input
                         type="text"
-                        class="form-control"
-                        placeholder="Cpf"
+                        class="form-control mb-2"
+                        placeholder="Numero do cpf"
                         v-model="cpfNumber"
                     />
-                </div>
-                <div class="mb-3">
                     <input
+                        id="imagemCpf"
                         type="file"
                         class="form-control"
                         placeholder="Imagem cpf"
                         @change="carregarImagemCpf($event)"
                     />
                 </div>
-                <div class="mb-3">
+                <div class="form-group mb-4">
+                    <label for="imagemRG">Anexar RG</label>
                     <input
                         type="text"
-                        class="form-control"
+                        class="form-control mb-2"
                         placeholder="Rg"
                         v-model="rgNumber"
                     />
-                </div>
-                <div class="mb-3">
+
                     <input
+                        id="imagemRG"
                         type="file"
                         class="form-control"
                         placeholder="Imagem rg"
                         @change="carregarImagemRg($event)"
                     />
                 </div>
-                <div class="mb-3">
+                <div class="form-group mb-4">
+                    <label for="passaporte">Anexar Passaporte</label>
                     <input
+                        id="passaporte"
                         type="text"
-                        class="form-control"
+                        class="form-control mb-2"
                         placeholder="Passaporte"
                         v-model="passaporteNumber"
                     />
-                </div>
-                <div class="mb-3">
+
                     <input
                         type="file"
                         class="form-control"
@@ -176,15 +186,16 @@
                         @change="carregarImagemPassaporte($event)"
                     />
                 </div>
-                <div class="mb-3">
+                <div class="form-group mb-4">
+                    <label for="cnh">Anexar CNH</label>
                     <input
+                        id="cnh"
                         type="text"
-                        class="form-control"
+                        class="form-control mb-2"
                         placeholder="Cnh"
                         v-model="cnhNumber"
                     />
-                </div>
-                <div class="mb-3">
+
                     <input
                         type="file"
                         class="form-control"
@@ -193,9 +204,7 @@
                     />
                 </div>
                 <div class="form-group mb-3">
-                    <label for="dataNascimento" class="form-label"
-                        >Data Nascimento</label
-                    >
+                    <label for="dataNascimento">Data Nascimento</label>
                     <input
                         type="date"
                         id="dataNascimento"
@@ -224,7 +233,13 @@
 </template>
 
 <script>
+import Dropdown from "../widgets/dropdowns/Dropdown.vue";
+import DropdownItem from "../widgets/dropdowns/DropdownItem.vue";
+
 export default {
+    name: "Clientes",
+    components: { Dropdown, DropdownItem },
+
     props: [],
     data() {
         return {

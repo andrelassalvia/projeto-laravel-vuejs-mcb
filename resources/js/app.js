@@ -23,28 +23,51 @@ Vue.component(
     "example-component",
     require("./components/ExampleComponent.vue").default
 );
-Vue.component("login-component", require("./components/Login.vue").default);
-Vue.component("home-component", require("./components/Home.vue").default);
+Vue.component(
+    "login-component",
+    require("./components/pages/Login.vue").default
+);
+Vue.component("home-component", require("./components/pages/Home.vue").default);
 Vue.component(
     "register-component",
-    require("./components/Register.vue").default
+    require("./components/pages/Register.vue").default
 );
 Vue.component(
     "clientescadastro-component",
-    require("./components/ClientesCadastro.vue").default
+    require("./components/pages/ClientesCadastro.vue").default
 );
 Vue.component(
     "clientedados-component",
-    require("./components/ClienteDados.vue").default
+    require("./components/pages/ClienteDados.vue").default
 );
 Vue.component(
     "clientes-component",
-    require("./components/Clientes.vue").default
+    require("./components/pages/Clientes.vue").default
 );
-Vue.component("table-component", require("./components/Table.vue").default);
-Vue.component("card-component", require("./components/Card.vue").default);
-Vue.component("button-component", require("./components/Button.vue").default);
-Vue.component("modal-component", require("./components/Modal.vue").default);
+Vue.component(
+    "table-component",
+    require("./components/widgets/Table.vue").default
+);
+Vue.component(
+    "card-component",
+    require("./components/widgets/Card.vue").default
+);
+Vue.component(
+    "button-component",
+    require("./components/widgets/Button.vue").default
+);
+Vue.component(
+    "modal-component",
+    require("./components/widgets/Modal.vue").default
+);
+Vue.component(
+    "dropdown-component",
+    require("./components/widgets/dropdowns/Dropdown.vue").default
+);
+Vue.component(
+    "dropdownItem-component",
+    require("./components/widgets/dropdowns/DropdownItem.vue").default
+);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
