@@ -13,6 +13,8 @@
 export default {
     name: "dropdownItem",
 
+    inject: ["dropdown"],
+
     computed: {
         is() {
             if (this.href !== undefined) {
@@ -22,8 +24,6 @@ export default {
             return "li";
         },
     },
-
-    inject: ["dropdown"],
 
     props: {
         href: {

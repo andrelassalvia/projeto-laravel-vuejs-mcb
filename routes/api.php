@@ -24,7 +24,8 @@ Route::prefix('v1')->middleware('jwt.auth')->group(function(){
     Route::apiresource('fornecedor', 'FornecedorController');
     Route::apiresource('servico', 'ServicoController');
     Route::apiresource('ordem', 'OrdemController');
-    Route::apiresource('estados', 'EstadoController');
+    Route::apiresource('states', 'StateController');
+    Route::apiresource('cities', 'CityController');
     Route::post('me', 'AuthController@me');
     Route::post('refresh', 'AuthController@refresh');
     Route::post('logout', 'AuthController@logout');

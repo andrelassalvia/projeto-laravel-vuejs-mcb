@@ -5513,22 +5513,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Clientes",
@@ -6118,6 +6102,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -6126,28 +6119,58 @@ __webpack_require__.r(__webpack_exports__);
     Dropdown: _dropdowns_Dropdown_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
     DropdownItem: _dropdowns_DropdownItem_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
+  props: {
+    stateName: {
+      type: String,
+      "default": "São Paulo"
+    }
+  },
   data: function data() {
     return {
-      urlBase: "http://localhost:8000/api/v1/estados",
+      urlBaseState: "http://localhost:8000/api/v1/states",
+      urlBaseCities: "http://localhost:8000/api/v1/cities",
       states: [],
       cities: [],
-      stateSelected: {}
+      stateSelected: {},
+      citySelected: {}
     };
   },
   methods: {
     getStates: function getStates() {
       var _this = this;
 
-      axios.get(this.urlBase).then(function (response) {
+      return axios.get(this.urlBaseState).then(function (response) {
         _this.states = response.data;
+      });
+    },
+    getCities: function getCities() {
+      var _this2 = this;
+
+      var url = this.urlBaseCities + "?state_id=" + this.stateSelected.id;
+      axios.get(url).then(function (response) {
+        _this2.cities = response.data;
       });
     },
     selectState: function selectState(state) {
       this.stateSelected = state;
+      this.getCities();
+    },
+    selectCity: function selectCity(city) {
+      this.citySelected = city;
     }
   },
   created: function created() {
-    this.getStates();
+    var _this3 = this;
+
+    this.getStates().then(function () {
+      if (_this3.stateName) {
+        _this3.stateSelected = _this3.states.find(function (state) {
+          return state.name === _this3.stateName;
+        });
+
+        _this3.getCities();
+      }
+    });
   }
 });
 
@@ -6267,7 +6290,7 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     text: {
       type: String,
-      "default": "Dropdown"
+      "default": undefined
     }
   },
   provide: function provide() {
@@ -6313,6 +6336,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "dropdownItem",
+  inject: ["dropdown"],
   computed: {
     is: function is() {
       if (this.href !== undefined) {
@@ -6322,7 +6346,6 @@ __webpack_require__.r(__webpack_exports__);
       return "li";
     }
   },
-  inject: ["dropdown"],
   props: {
     href: {
       type: String,
@@ -41081,55 +41104,7 @@ var render = function () {
                   }),
                 ]),
                 _vm._v(" "),
-                _c("StateCity"),
-                _vm._v(" "),
-                _c("div", { staticClass: "mb-3" }, [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.estadoBr,
-                        expression: "estadoBr",
-                      },
-                    ],
-                    staticClass: "form-control",
-                    attrs: { type: "text", placeholder: "Estado BR" },
-                    domProps: { value: _vm.estadoBr },
-                    on: {
-                      input: function ($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.estadoBr = $event.target.value
-                      },
-                    },
-                  }),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "mb-3" }, [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.cidadeBr,
-                        expression: "cidadeBr",
-                      },
-                    ],
-                    staticClass: "form-control",
-                    attrs: { type: "text", placeholder: "Cidade BR" },
-                    domProps: { value: _vm.cidadeBr },
-                    on: {
-                      input: function ($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.cidadeBr = $event.target.value
-                      },
-                    },
-                  }),
-                ]),
+                _c("StateCity", { attrs: { stateName: "São Paulo" } }),
                 _vm._v(" "),
                 _c("div", { staticClass: "form-group mb-4" }, [
                   _c("label", { attrs: { for: "imagemCpf" } }, [
@@ -42090,7 +42065,7 @@ var render = function () {
     [
       _c(
         "dropdown",
-        { attrs: { text: _vm.stateSelected.name || "Estado BR" } },
+        { attrs: { text: _vm.stateSelected.name || "Estado no Brasil" } },
         _vm._l(_vm.states, function (state) {
           return _c(
             "dropdownItem",
@@ -42102,7 +42077,27 @@ var render = function () {
                 },
               },
             },
-            [_vm._v(_vm._s(state.name))]
+            [_vm._v(_vm._s(state.name) + "\n        ")]
+          )
+        }),
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "dropdown",
+        { attrs: { text: _vm.citySelected.name || "Escolha cidade" } },
+        _vm._l(_vm.cities, function (city) {
+          return _c(
+            "dropdownItem",
+            {
+              key: city.id,
+              on: {
+                click: function ($event) {
+                  return _vm.selectCity(city)
+                },
+              },
+            },
+            [_vm._v("\n            " + _vm._s(city.name) + "\n        ")]
           )
         }),
         1

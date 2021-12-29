@@ -113,24 +113,8 @@
                     />
                 </div>
 
-                <StateCity></StateCity>
+                <StateCity :stateName="'São Paulo'"></StateCity>
 
-                <div class="mb-3">
-                    <input
-                        type="text"
-                        class="form-control"
-                        placeholder="Estado BR"
-                        v-model="estadoBr"
-                    />
-                </div>
-                <div class="mb-3">
-                    <input
-                        type="text"
-                        class="form-control"
-                        placeholder="Cidade BR"
-                        v-model="cidadeBr"
-                    />
-                </div>
                 <div class="form-group mb-4">
                     <label for="imagemCpf">Anexar CPF</label>
                     <input

@@ -3,12 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Estado;
+use App\Models\State;
 use Illuminate\Support\Facades\DB;
 
-
-
-class EstadoController extends Controller
+class StateController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +15,8 @@ class EstadoController extends Controller
      */
     public function index()
     {
-       $estados = DB::table('estados')->orderBy('name')->get();
-       return response()->json($estados, 200);
+        $states = DB::table('states')->orderBy('name')->get();
+        return response()->json($states, 200);
     }
 
     /**
