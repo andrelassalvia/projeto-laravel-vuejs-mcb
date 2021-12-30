@@ -80,6 +80,7 @@
                         v-model="nome"
                     />
                 </div>
+
                 <div class="mb-3">
                     <input
                         type="text"
@@ -88,6 +89,7 @@
                         v-model="telefone"
                     />
                 </div>
+
                 <div class="mb-3">
                     <input
                         type="email"
@@ -96,6 +98,7 @@
                         v-model="email"
                     />
                 </div>
+
                 <div class="mb-3">
                     <input
                         type="text"
@@ -104,6 +107,7 @@
                         v-model="paisResidencia"
                     />
                 </div>
+
                 <div class="mb-3">
                     <input
                         type="text"
@@ -112,8 +116,12 @@
                         v-model="cidadeResidencia"
                     />
                 </div>
-
-                <StateCity :stateName="'São Paulo'"></StateCity>
+                {{ cidadeBr }} - {{ estadoBr }}
+                <StateCity
+                    :stateName="'São Paulo'"
+                    @sendState="getState"
+                    @sendCity="getCity"
+                ></StateCity>
 
                 <div class="form-group mb-4">
                     <label for="imagemCpf">Anexar CPF</label>
@@ -123,6 +131,7 @@
                         placeholder="Numero do cpf"
                         v-model="cpfNumber"
                     />
+
                     <input
                         id="imagemCpf"
                         type="file"
@@ -253,8 +262,13 @@ export default {
         carregarImagemCnh(e) {
             this.cnhImagem = e.target.files;
         },
+        getState(state) {
+            this.estadoBr = state.name;
+        },
+        getCity(city) {
+            this.cidadeBr = city.name;
+        },
         salvar() {
-            console.log(this.cpfImagem);
             let formData = new FormData();
             formData.append("nome", this.nome);
             formData.append("telefone", this.telefone);
@@ -264,14 +278,29 @@ export default {
             formData.append("estado_br", this.estadoBr);
             formData.append("cidade_br", this.cidadeBr);
             formData.append("cpf", this.cpfNumber);
-            formData.append("cpf_imagem", this.cpfImagem[0]);
             formData.append("rg", this.rgNumber);
-            formData.append("rg_imagem", this.rgImagem[0]);
             formData.append("passaporte", this.passaporteNumber);
-            formData.append("passaporte_imagem", this.passaporteImagem[0]);
             formData.append("cnh", this.cnhNumber);
-            formData.append("cnh_imagem", this.cnhImagem[0]);
-            formData.append("dt_nascimento", this.dataNascimento);
+
+            if (this.cpfImagem[0]) {
+                formData.append("cpf_imagem", this.cpfImagem[0]);
+            }
+
+            if (this.rgImagem[0]) {
+                formData.append("rg_imagem", this.rgImagem[0]);
+            }
+
+            if (this.passaporteImagem[0]) {
+                formData.append("passaporte_imagem", this.passaporteImagem[0]);
+            }
+
+            if (this.cnhImagem[0]) {
+                formData.append("cnh_imagem", this.cnhImagem[0]);
+            }
+
+            if (this.dataNascimento) {
+                formData.append("dt_nascimento", this.dataNascimento);
+            }
 
             let config = {
                 headers: {
@@ -285,8 +314,8 @@ export default {
                 .then((response) => {
                     console.log(response);
                 })
-                .catch((errors) => {
-                    console.log(errors);
+                .catch((error) => {
+                    console.log(error.response.data);
                 });
         },
     },

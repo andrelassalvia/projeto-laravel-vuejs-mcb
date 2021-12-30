@@ -5513,6 +5513,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Clientes",
@@ -5554,8 +5563,13 @@ __webpack_require__.r(__webpack_exports__);
     carregarImagemCnh: function carregarImagemCnh(e) {
       this.cnhImagem = e.target.files;
     },
+    getState: function getState(state) {
+      this.estadoBr = state.name;
+    },
+    getCity: function getCity(city) {
+      this.cidadeBr = city.name;
+    },
     salvar: function salvar() {
-      console.log(this.cpfImagem);
       var formData = new FormData();
       formData.append("nome", this.nome);
       formData.append("telefone", this.telefone);
@@ -5565,14 +5579,30 @@ __webpack_require__.r(__webpack_exports__);
       formData.append("estado_br", this.estadoBr);
       formData.append("cidade_br", this.cidadeBr);
       formData.append("cpf", this.cpfNumber);
-      formData.append("cpf_imagem", this.cpfImagem[0]);
       formData.append("rg", this.rgNumber);
-      formData.append("rg_imagem", this.rgImagem[0]);
       formData.append("passaporte", this.passaporteNumber);
-      formData.append("passaporte_imagem", this.passaporteImagem[0]);
       formData.append("cnh", this.cnhNumber);
-      formData.append("cnh_imagem", this.cnhImagem[0]);
-      formData.append("dt_nascimento", this.dataNascimento);
+
+      if (this.cpfImagem[0]) {
+        formData.append("cpf_imagem", this.cpfImagem[0]);
+      }
+
+      if (this.rgImagem[0]) {
+        formData.append("rg_imagem", this.rgImagem[0]);
+      }
+
+      if (this.passaporteImagem[0]) {
+        formData.append("passaporte_imagem", this.passaporteImagem[0]);
+      }
+
+      if (this.cnhImagem[0]) {
+        formData.append("cnh_imagem", this.cnhImagem[0]);
+      }
+
+      if (this.dataNascimento) {
+        formData.append("dt_nascimento", this.dataNascimento);
+      }
+
       var config = {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -5581,8 +5611,8 @@ __webpack_require__.r(__webpack_exports__);
       };
       axios.post(this.urlBase, formData, config).then(function (response) {
         console.log(response);
-      })["catch"](function (errors) {
-        console.log(errors);
+      })["catch"](function (error) {
+        console.log(error.response.data);
       });
     }
   }
@@ -6154,9 +6184,11 @@ __webpack_require__.r(__webpack_exports__);
     selectState: function selectState(state) {
       this.stateSelected = state;
       this.getCities();
+      this.$emit("sendState", this.stateSelected); // enviar estado selecionado para o componente pai
     },
     selectCity: function selectCity(city) {
       this.citySelected = city;
+      this.$emit("sendCity", city);
     }
   },
   created: function created() {
@@ -6169,6 +6201,9 @@ __webpack_require__.r(__webpack_exports__);
         });
 
         _this3.getCities();
+
+        _this3.$emit("sendState", _this3.stateSelected); // enviar estado selecionado para o componente pai
+
       }
     });
   }
@@ -6276,11 +6311,13 @@ __webpack_require__.r(__webpack_exports__);
     close: function close() {
       this.isOpen = false;
     },
+    // Fecha se clicar fora do component
     clickOutListener: function clickOutListener(evt) {
       if (!this.$el.contains(evt.target)) {
         this.close();
       }
     },
+    // fecha se clicarmos em outro dropdown
     rootCloseListener: function rootCloseListener(vm) {
       if (vm !== this) {
         this.close();
@@ -41103,8 +41140,17 @@ var render = function () {
                     },
                   }),
                 ]),
-                _vm._v(" "),
-                _c("StateCity", { attrs: { stateName: "São Paulo" } }),
+                _vm._v(
+                  "\n            " +
+                    _vm._s(_vm.cidadeBr) +
+                    " - " +
+                    _vm._s(_vm.estadoBr) +
+                    "\n            "
+                ),
+                _c("StateCity", {
+                  attrs: { stateName: "São Paulo" },
+                  on: { sendState: _vm.getState, sendCity: _vm.getCity },
+                }),
                 _vm._v(" "),
                 _c("div", { staticClass: "form-group mb-4" }, [
                   _c("label", { attrs: { for: "imagemCpf" } }, [

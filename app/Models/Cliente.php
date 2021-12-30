@@ -24,11 +24,11 @@ class Cliente extends Model
         [
             'el'=> 'rg',
             'field'=> 'rg_imagem',
-                    ],
+        ],
         [
             'el'=> 'passaporte',
             'field'=> 'passaporte_imagem',
-                    ],
+        ],
         [
             'el'=> 'cnh',
             'field'=> 'cnh_imagem',
@@ -46,17 +46,6 @@ class Cliente extends Model
             'rg_imagem' => 'bail|file|mimes:png,jpeg,jpg',
             'passaporte_imagem' => 'bail|file|mimes:png,jpeg,jpg',
             'cnh_imagem' => 'bail|file|mimes:png,jpeg,jpg',
-
-            /*
-            'pais_residencia' => ,
-            'cidade_residencia' => ,
-            'estado_br' => ,
-            'cidade_br' => ,
-            'cpf' => ,
-            'rg' => ,
-            'passaporte' => ,
-            'cnh' => ,
-            */
             'dt_nascimento' => 'date'
 
         ];

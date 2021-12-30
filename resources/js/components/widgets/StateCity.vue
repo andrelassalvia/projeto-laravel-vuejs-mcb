@@ -62,10 +62,12 @@ export default {
         selectState(state) {
             this.stateSelected = state;
             this.getCities();
+            this.$emit("sendState", this.stateSelected); // enviar estado selecionado para o componente pai
         },
 
         selectCity(city) {
             this.citySelected = city;
+            this.$emit("sendCity", city);
         },
     },
 
@@ -76,6 +78,7 @@ export default {
                     (state) => state.name === this.stateName
                 );
                 this.getCities();
+                this.$emit("sendState", this.stateSelected); // enviar estado selecionado para o componente pai
             }
         });
     },

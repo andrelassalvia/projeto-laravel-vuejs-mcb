@@ -54,12 +54,14 @@ export default {
             this.isOpen = false;
         },
 
+        // Fecha se clicar fora do component
         clickOutListener(evt) {
             if (!this.$el.contains(evt.target)) {
                 this.close();
             }
         },
 
+        // fecha se clicarmos em outro dropdown
         rootCloseListener(vm) {
             if (vm !== this) {
                 this.close();
